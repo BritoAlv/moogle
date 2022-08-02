@@ -11,13 +11,25 @@ public class Program
     public static void Main()
     {
         BenchmarkRunner.Run<benchmark>();
- /*     for(int i = 1; i < 100; i++)
+        Console.WriteLine(levensthein_implementations.levensthein_0("Alvaro","Abel"));
+        Console.WriteLine(levensthein_implementations.levensthein_0("Alvaro","abel"));
+        Console.WriteLine(levensthein_implementations.levensthein_0("Alvaro","Albaro"));
+        Console.WriteLine(levensthein_implementations.levensthein_0("Alvaro","Amanda"));
+
+/*         for(int i = 1; i < 10000; i++)
         {
             string a = r_string.random_string(i);
             string b = r_string.random_string(i);
 
-            Console.WriteLine(a + " " + b + " " + levensthein_implementations.levensthein_0(a,b) + " " +  levensthein_implementations.levensthein_1(a,b));
-        } */
+            Console.WriteLine(
+                levensthein_implementations.levensthein_0(a,b) + " " +
+                levensthein_implementations.levensthein_1(a,b) + " " +
+                levensthein_implementations.levensthein_2(a,b) + " " +
+                levensthein_implementations.levensthein_3(a,b) + " " +
+                levensthein_implementations.levensthein_4(a,b) + " " +
+                levensthein_implementations.levensthein_5(a,b) + " " +
+                levensthein_implementations.levensthein_6(a,b) + " " );
+        }  */
               
     }
 }

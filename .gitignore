@@ -452,3 +452,14 @@ $RECYCLE.BIN/
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+.vscode/tasks.json
+.vscode/launch.json
+features_implementations/Levensthein/.vscode/launch.json
+features_implementations/Levensthein/.vscode/tasks.json
+features_implementations/Levensthein/Template.synctex.gz
+features_implementations/Levensthein/Template.out
+features_implementations/Levensthein/Template.fls
+features_implementations/Levensthein/Template.fdb_latexmk
+features_implementations/Levensthein/Template.aux
+features_implementations/Levensthein/Template.pdf
+features_implementations/Levensthein/Template.tex

@@ -1,7 +1,7 @@
 using System.Buffers;
-public static class levensthein_implementations
+public static class levensthein
 {
-    public static int levensthein_0 (string a, string b)
+    public static int v_0 (string a, string b)
     {
         int[,] costMatrix = new int[a.Length+1, b.Length+1];
         for(int i = 0; i<= a.Length; i++)
@@ -25,7 +25,7 @@ public static class levensthein_implementations
         return costMatrix[a.Length, b.Length];
     }
 
-    public static int levensthein_1(string a, string b)
+    public static int v_1(string a, string b)
     {
         int[] fila = new int[b.Length];
         for (int i = 0; i < b.Length; i++)
@@ -48,7 +48,7 @@ public static class levensthein_implementations
         return fila[b.Length-1];          
     }
 
-    public static int levensthein_2(string a, string b)
+    public static int v_2(string a, string b)
     {
         // https://adamsitnik.com/Array-Pool/
         int[] fila = ArrayPool<int>.Shared.Rent(b.Length);
@@ -74,7 +74,7 @@ public static class levensthein_implementations
         ArrayPool<int>.Shared.Return(fila);
         return result;          
     }
-    public static int levensthein_3(string a, string b)
+    public static int v_3(string a, string b)
     {
         // trim common start and common end
         int start = 0;
@@ -125,7 +125,7 @@ public static class levensthein_implementations
         ArrayPool<int>.Shared.Return(fila);
         return result;          
     }    
-    public static int levensthein_4(string a, string b)
+    public static int v_4(string a, string b)
     {
         // trim common start and common end
         int start = 0;
@@ -176,8 +176,9 @@ public static class levensthein_implementations
         ArrayPool<int>.Shared.Return(fila);
         return result;          
     }    
-    public static int levensthein_5(string a, string b)
+    public static int v_5(string a, string b)
     {
+    	// optimizes cases when two caracter are equal
         // trim common start and common end
         int start = 0;
         int a_end = a.Length;
@@ -233,7 +234,7 @@ public static class levensthein_implementations
         ArrayPool<int>.Shared.Return(fila);
         return result;          
     }    
-public static int levensthein_6(string a, string b)
+public static int v_6(string a, string b)
     {
         // trim common start and common end
         int start = 0;
@@ -271,7 +272,7 @@ public static int levensthein_6(string a, string b)
         {
             int last_substitution = i;
             int last_insertion = i+1;
-            char aChar = a_span[i];
+            char aChar = a_span[i]; // get this thing out 
             for (int j = 0; j < b_span.Length; j++)
             {
                 int cost = last_substitution;

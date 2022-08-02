@@ -1,4 +1,7 @@
 using System.Buffers;
+/// <summary>
+/// implementaciones del algoritmo de Levensthein.
+/// </summary>
 public static class levensthein
 {
     /// <summary>

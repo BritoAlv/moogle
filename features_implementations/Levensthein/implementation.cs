@@ -1,6 +1,12 @@
 using System.Buffers;
 public static class levensthein
 {
+    /// <summary>
+    /// implementación del algoritmo de Levensthein
+    /// </summary>
+    /// <param name="a">un string</param>
+    /// <param name="b">el otro  </param>
+    /// <returns></returns>
     public static int v_0 (string a, string b)
     {
         int[,] costMatrix = new int[a.Length+1, b.Length+1];
@@ -24,7 +30,6 @@ public static class levensthein
         }
         return costMatrix[a.Length, b.Length];
     }
-
     public static int v_1(string a, string b)
     {
         int[] fila = new int[b.Length];

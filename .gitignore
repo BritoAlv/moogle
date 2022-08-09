@@ -464,3 +464,5 @@ features_implementations/Levensthein/Template.aux
 features_implementations/Levensthein/Template.pdf
 features_implementations/Levensthein/Template.tex
 features_implementations/Levensthein/implementation.cs
+features_implementations/tokenization/.vscode/launch.json
+features_implementations/tokenization/.vscode/tasks.json

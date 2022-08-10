@@ -473,3 +473,6 @@ features_implementations/document_object/.vscode/tasks.json
 features_implementations/Stemmer/.vscode/tasks.json
 .gitignore
 features_implementations/Stemmer/.vscode/launch.json
+features_implementations/stemmer/.vscode/launch.json
+features_implementations/stemmer/.vscode/tasks.json
+features_implementations/stemmer/words.txt

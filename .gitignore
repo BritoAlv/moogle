@@ -468,3 +468,8 @@ features_implementations/tokenization/.vscode/launch.json
 features_implementations/tokenization/.vscode/tasks.json
 features_implementations/tokenization/Principito.txt
 features_implementations/tokenization/program.cs
+features_implementations/document_object/.vscode/launch.json
+features_implementations/document_object/.vscode/tasks.json
+features_implementations/Stemmer/.vscode/tasks.json
+.gitignore
+features_implementations/Stemmer/.vscode/launch.json

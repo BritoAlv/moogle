@@ -35,7 +35,7 @@ public static class tokenization
                 // if no la contiene
                 if(!document_info.ContainsKey(word))
                 {
-                    document_info[word] = new info();
+                    document_info[word] = new info(word);
                 }
 
 

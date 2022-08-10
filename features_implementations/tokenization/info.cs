@@ -6,5 +6,6 @@ public class info {
     public info()
     {
         term_frequency = 0;
+        positions = new List<Tuple<int, int>>();
     } 
 }

@@ -7,6 +7,11 @@ public static class tokenization
         return text;
     }
     
+    public static string to_lower(string text)
+    {
+        return text.ToLower();
+    }
+
     public static Dictionary<string, info>  words_in_document(string text)
     {
         Dictionary<string, info > document_info = new Dictionary<string, info>();

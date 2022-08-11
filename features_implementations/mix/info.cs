@@ -1,5 +1,6 @@
 public class info {
-    public int term_frequency{get;set;}
+    public double term_frequency{get;set;}
+    public int stemed {get;set;}
     public double tf_idf{get;set;}
     public List<Tuple<int,int>> positions{get; set;}
     public string linked{get; set;}
@@ -8,6 +9,7 @@ public class info {
         term_frequency = 0;
         positions = new List<Tuple<int, int>>();
         linked = word;
+        stemed = 1;
     }
 
     // the goal of this method is mix the keys that point to the same word, like ayudo-ayudar.
@@ -26,6 +28,8 @@ public class info {
             }
             // update the key
             result[k.Value].term_frequency += the_dict[k.Key].term_frequency;
+            // stemed is the number of words that get stemmed to this word.
+            result[k.Value].stemed +=1;
             foreach (Tuple<int,int> position in the_dict[k.Key].positions)
             {
                 result[k.Value].positions.Add(position);

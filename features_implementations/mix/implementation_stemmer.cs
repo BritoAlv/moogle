@@ -42,7 +42,7 @@ public static class stemmer
         {
             foreach (string ending in spanish_endings)
             {
-                if( (remove_tildes(words[i]) == lexem + ending) | words[i] == lexem)
+                if( (remove_tildes(words[i]) == lexem + ending) | remove_tildes(words[i]) == lexem)
                 {
                     result.Add(words[i]);
                     break;
@@ -75,12 +75,14 @@ public static class stemmer
             }
         }
         string common_start = "";
+        char check;
         for (int i = 0; i < min; i++)
         {
+            check = remove_tildes(words[0][i].ToString()).ToCharArray()[0];
             bool find = false;
             foreach (string word in words)
             {
-                if ( ! ( words[0][i] == word[i]  ) )
+                if ( ! ( check == remove_tildes(word[i].ToString()).ToCharArray()[0]))
                 {
                     find = true;
                     break;
@@ -92,7 +94,7 @@ public static class stemmer
             }
             else
             {
-                common_start = common_start + words[0][i];
+                common_start = common_start + check;
             }
             
         }
@@ -105,7 +107,7 @@ public static class stemmer
         {
             if (!vocals.Contains(word[i]))
             {
-                return word.Substring(0,i+1);
+                return remove_tildes(word.Substring(0,i+1));
             }
         }
         return " ";
@@ -129,7 +131,7 @@ public static class stemmer
     }    
     public static bool inside_rectangle(string root, string word)
     {
-        if(root == word)
+        if(remove_tildes(root) == remove_tildes(word))
         {
             return true;
         }
@@ -221,7 +223,7 @@ public static class stemmer
                             
                             foreach (string word in rectangle_words)
                             {
-                                if ( !(word.Length == lens | vocals.Contains(word[lens-1])))
+                                if ( !( word.Length == lens)  && !(vocals.Contains(word[lens])))
                                 {
                                     bo = false;
                                     break;    

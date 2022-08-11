@@ -1,16 +1,19 @@
 public class corpus
 {
     public Dictionary<string, int> idf {get;set;}
-    
-    public static void update_corpus(Dictionary<string, int> target, string[] words)
+    public corpus()
+    {
+        this.idf = new Dictionary<string, int>();
+    }
+    public void update_corpus(string[] words)
     {
         foreach (string word in words)
         {
-            if (!target.ContainsKey(word))
+            if (!this.idf.ContainsKey(word))
             {
-                target[word] = 0;
+                this.idf[word] = 0;
             }
-            target[word] += 1;
+            this.idf[word] += 1;
         }
     }
 }

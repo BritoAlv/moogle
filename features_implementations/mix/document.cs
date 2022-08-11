@@ -17,7 +17,7 @@ public class document
         // update the dict with the new keys
         this.initial_words = info.mix_keys(initial_words, link_dict);
         // set words to the corpus.
-        corpus.update_corpus(x.idf, initial_words.Keys.ToArray() );
+        x.update_corpus(initial_words.Keys.ToArray() );
     }
 
     public void update_idf(corpus x)

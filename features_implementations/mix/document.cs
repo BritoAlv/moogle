@@ -37,7 +37,7 @@ public class document
         foreach (KeyValuePair<string,info> k in this.initial_words)
         {
             this.initial_words[k.Key].tf_idf = ((double)this.initial_words[k.Key].tf_idf) / ((double)this.initial_words[k.Key].stemed);
-            this.initial_words[k.Key].term_frequency = ((double)this.initial_words[k.Key].term_frequency) / ((double)count);
+            this.initial_words[k.Key].term_frequency = ((double)this.initial_words[k.Key].term_frequency) / ((double)count) / ((double)this.initial_words[k.Key].stemed);
         } 
     }
 }

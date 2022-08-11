@@ -12,12 +12,13 @@ public class document
         this.text = tokenization.read_txt(name);
         // split and get words
         this.initial_words = tokenization.words_in_document(text);
+        // update the corpus with all the words.
+        x.update_corpus(initial_words.Keys.ToArray() );
         // perform an stemmer algorithm
         this.link_dict = stemmer.stem(initial_words.Keys.ToArray());
         // update the dict with the new keys
         this.initial_words = info.mix_keys(initial_words, link_dict);
-        // set words to the corpus.
-        x.update_corpus(initial_words.Keys.ToArray() );
+        
     }
 
     public void update_idf(corpus x)
@@ -35,8 +36,8 @@ public class document
         // update tf, update idf.
         foreach (KeyValuePair<string,info> k in this.initial_words)
         {
-            this.initial_words[k.Key].tf_idf = this.initial_words[k.Key].tf_idf / ((double)this.initial_words[k.Key].stemed);
-            this.initial_words[k.Key].term_frequency = this.initial_words[k.Key].tf_idf / ((double)count);
+            this.initial_words[k.Key].tf_idf = ((double)this.initial_words[k.Key].tf_idf) / ((double)this.initial_words[k.Key].stemed);
+            this.initial_words[k.Key].term_frequency = ((double)this.initial_words[k.Key].term_frequency) / ((double)count);
         } 
     }
 }

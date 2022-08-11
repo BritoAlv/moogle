@@ -4,14 +4,9 @@ public static class tokenization
     public static string read_txt(string name)
     {
         string text = System.IO.File.ReadAllText("./"+name+".txt");
-        return text;
-    }
-    
-    public static string to_lower(string text)
-    {
         return text.ToLower();
     }
-
+    
     public static Dictionary<string, info>  words_in_document(string text)
     {
         Dictionary<string, info > document_info = new Dictionary<string, info>();

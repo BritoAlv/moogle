@@ -1,18 +1,24 @@
 public static class stemmer
 {
-    public static string[] spanish_endings = {"ba","bas","ron","ste","mos","ndo","o", "a", "r", "as", "n", "ras", "ria", "me","los", "ia","nos", "i","es","rlos","rlas","ste", "do", "s", "ndolo", "ndo", "ndola", "ndome","ndonos", "ndolos","an", "ran", "ra", "rte","le", "te", "da", "dos", "la", "se", "d", "nlo", "rle","rnos", "rse", "ía","ría", "é", "á", "ó", "í"};
-    public static char[] vocals = {'a','e','i','o','u'};
+    public static string[] spanish_endings = 
+    {"ba","bas","ron","ste","mos","ndo","o", "a", "r", "as", "n", "ras", "ria", "me","los", "ia","nos", "i","es","rlos","rlas","ste", "do", "s", "ndolo", "ndo", "ndola", "ndome","ndonos", "ndolos","an", "ran", "ra", "rte","le", "te", "da", "dos", "la", "se", "d", "nlo", "rle","rnos", "rse"};
+    public static char[] vocals = {'a','e','i','o','u','á','é','í','ó','ú'};
     /* 
     the stemmer will take the dictionary with all words in the document and will try put words with same family. How this will work, this will take an array of words, and will return a dict where key is the word and value is the word a la cual fue linked.
     Por ejemplo: ayudamos : ayudar
     */
 
     // beginning of a lot of auxiliar functions.
-    public static void link_dict(string root, List<string> words, Dictionary<string, string> thedict)
+
+    public static string remove_tildes(string a)
+    {
+        return a.Replace('á','a').Replace('é','e').Replace('í','i').Replace('ó','o').Replace('ú','u');
+    }
+    public static void linkk_dict(List<string> words, Dictionary<string, string> thedict)
     {
         foreach (string word in words)
         {
-            thedict[word] = root;
+            thedict[word] = words[0];
         }
     }
     public static List<string>  inflected(List<string> words, string lexem)
@@ -36,7 +42,7 @@ public static class stemmer
         {
             foreach (string ending in spanish_endings)
             {
-                if((words[i] == lexem + ending) | words[i] == lexem)
+                if( (remove_tildes(words[i]) == lexem + ending) | words[i] == lexem)
                 {
                     result.Add(words[i]);
                     break;
@@ -188,7 +194,7 @@ public static class stemmer
                         }
                         clase.Add(root+"mente");
                         // we have all related words in a clase, so let's ut them in the dict.
-                        link_dict(root, clase, result);
+                        linkk_dict(clase, result);
                         foreach (string word in clase)
                         {
                             b.Remove(word);
@@ -229,7 +235,7 @@ public static class stemmer
                         }
                         if (bo)
                         {
-                            link_dict(root,rectangle_words, result);
+                            linkk_dict(rectangle_words, result);
                             foreach (string word in rectangle_words)
                             {
                                 b.Remove(word);
@@ -252,7 +258,7 @@ public static class stemmer
             {
                 clase.Add(find_plural(root));
             }
-            link_dict(root, clase, result);
+            linkk_dict(clase, result);
             foreach(string word in clase)
             {
                 b.Remove(word);

@@ -9,7 +9,7 @@ public class info {
         term_frequency = 0;
         positions = new List<Tuple<int, int>>();
         linked = word;
-        stemed = 1;
+        stemed = 0;
     }
 
     // the goal of this method is mix the keys that point to the same word, like ayudo-ayudar.

@@ -478,3 +478,5 @@ features_implementations/stemmer/.vscode/tasks.json
 features_implementations/stemmer/words.txt
 features_implementations/mix/.vscode/launch.json
 features_implementations/mix/.vscode/tasks.json
+features_implementations/corpus/.vscode/tasks.json
+features_implementations/corpus/.vscode/launch.json

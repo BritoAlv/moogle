@@ -7,31 +7,36 @@ public class document
 
     public document(string title, corpus x)
     {
-        name = title;
-        text = tokenization.read_txt(name);
-        initial_words = tokenization.words_in_document(text);
-        link_dict = stemmer.stem(initial_words.Keys.ToArray());
+        this.name = title;
+        // read txt
+        this.text = tokenization.read_txt(name);
+        // split and get words
+        this.initial_words = tokenization.words_in_document(text);
+        // perform an stemmer algorithm
+        this.link_dict = stemmer.stem(initial_words.Keys.ToArray());
+        // update the dict with the new keys
+        this.initial_words = info.mix_keys(initial_words, link_dict);
         // set words to the corpus.
         corpus.update_corpus(x.idf, initial_words.Keys.ToArray() );
     }
 
-    public static void update_idf(Dictionary<string, info> target, corpus x, Dictionary<string,string> link)
+    public void update_idf(corpus x)
     {
         // take the words from link, find its idf value in corpus, and puts in the target.
 
         // count will be the number of words that there are in the document, its link keys length.
         int count = 0; 
-        foreach (KeyValuePair<string, string> k in link )
+        foreach (KeyValuePair<string, string> k in this.link_dict )
         {
-            target[k.Value].tf_idf = x.idf[k.Key];
+            this.initial_words[k.Value].tf_idf = x.idf[k.Key];
             count +=1;
         }
 
         // update tf, update idf.
-        foreach (KeyValuePair<string,info> k in target)
+        foreach (KeyValuePair<string,info> k in this.initial_words)
         {
-            target[k.Key].tf_idf = target[k.Key].tf_idf / ((double)target[k.Key].stemed);
-            target[k.Key].term_frequency = target[k.Key].tf_idf / ((double)count);
+            this.initial_words[k.Key].tf_idf = this.initial_words[k.Key].tf_idf / ((double)this.initial_words[k.Key].stemed);
+            this.initial_words[k.Key].term_frequency = this.initial_words[k.Key].tf_idf / ((double)count);
         } 
     }
 }

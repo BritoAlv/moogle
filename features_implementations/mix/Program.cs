@@ -12,6 +12,7 @@
         for (int i = 0; i < rr.Length; i++)
         {
             rr[i].update_tf_idf(X);
-        }    
+        }
+            
     }
 }

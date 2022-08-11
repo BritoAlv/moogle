@@ -36,7 +36,7 @@ public static class tokenization
 
                 // en este punto ya la contiene
                 document_info[word].term_frequency += 1;
-                document_info[word].positions.Append(new Tuple<int, int>(start,i-1));   
+                document_info[word].positions.Add(new Tuple<int, int>(start,i-1));   
             }
         }
         return document_info;    

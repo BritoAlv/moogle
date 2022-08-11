@@ -21,7 +21,7 @@ public class document
         
     }
 
-    public void update_idf(corpus x)
+    public void update_tf_idf(corpus x)
     {
         // take the words from link, find its idf value in corpus, and puts in the target.
 
@@ -38,8 +38,10 @@ public class document
         {
             this.initial_words[k.Key].tf_idf = ((double)this.initial_words[k.Key].tf_idf) / ((double)this.initial_words[k.Key].stemed);
             this.initial_words[k.Key].term_frequency = ((double)this.initial_words[k.Key].term_frequency) / ((double)count) / ((double)this.initial_words[k.Key].stemed);
+            this.initial_words[k.Key].tf_idf = this.initial_words[k.Key].term_frequency * Math.Log10( ( (double)x.number_of_docs) / this.initial_words[k.Key].tf_idf);
         } 
     }
+
 }
 
 // when a document it's created it will tokenize its words, and after that we will stem them, so at the end we have a dict which contain the links, and other that contain the words with its term frequency, at this point we take all the words in the link_dict and send them to the corpus, now we have to wait until all document objects are created, after that we define the idf, to make this we need another function that updates idf, but the thing is how set idf of updated words. It has to be the mean of the words. 

@@ -1,32 +1,49 @@
 public static class tokenization
 {
-// this class is in charge of read the txt files in memory and return a csv file where first column is a word, second column is the frequency of the word in the document and third column is the positions where
-
-/// <summary>
-/// read the text from disk
-/// </summary>
-/// <param name="path"></param>
-/// <returns></returns>
-public static string read_txt(string path)
+    // function to read a .txt
+    public static string read_txt(string name)
     {
-        string text = System.IO.File.ReadAllText(path); 
-
+        string text = System.IO.File.ReadAllText("./"+name+".txt");
+        return text;
+    }
+    
+    public static string to_lower(string text)
+    {
+        return text.ToLower();
     }
 
-/// <summary>
-/// 
-/// </summary>
-/// <param name="text"></param>
-/// <returns></returns>
-public static string process_text(string text)
+    public static Dictionary<string, info>  words_in_document(string text)
     {
+        Dictionary<string, info > document_info = new Dictionary<string, info>();
+        for (int i = 0; i < text.Length; i++)
+        {
+            // reach an index that is alphanumeric
+            if(char.IsLetterOrDigit(text[i]))
+            {
+                int start = i;
+                string word = (text[i]).ToString();
+                // move i to where the word ends
+                i = i+1;
+                while(char.IsLetterOrDigit(text[i]))
+                {
+                    word = word + text[i];
+                    i = i+1;
+                }
+                // i-1 is where the word ends
+                // put the word in the dict.
 
-    }  
+                // if no la contiene
+                if(!document_info.ContainsKey(word))
+                {
+                    document_info[word] = new info(word);
+                }
 
 
-
-
-
-
-
+                // en este punto ya la contiene
+                document_info[word].term_frequency += 1;
+                document_info[word].positions.Append(new Tuple<int, int>(start,i-1));   
+            }
+        }
+        return document_info;    
+    }
 }

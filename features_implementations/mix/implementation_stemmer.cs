@@ -149,6 +149,28 @@ public static class stemmer
 
     // ending of a lot of auxiliar functions.
     
+
+    // given a dict where its keys are sorted, find to where link word.
+    public static string stem_word (string word, Dictionary<string, string> info)
+    {
+        // first closest words to "word".
+        List<string> aa = info.Keys.ToList<string>();
+        int position = binary_search(aa, word);
+        aa.Insert(position, word);
+        int start = (position-10 > 0)?(position-10):0;
+        int end = (position+10 < aa.Count)?(position+10):aa.Count;
+        string[] q = new string[end-start+1];
+        for (int i = start; i <= end; i++)
+        {
+            q[i] = aa[i];
+        }
+        Dictionary<string, string> result = stem(q);
+        return result[word];    
+    }
+
+    
+    
+    // perform the stemming process
     public static Dictionary<string, string> stem(string[] words)
     {
 
@@ -268,4 +290,44 @@ public static class stemmer
         }
         return result;
     }
+    public static int binary_search(List<string> source, string word)
+    {
+            int l = 0;
+            int r = source.Count-1;
+            int mid = 0;
+            while(r-l > 1)
+            // as long as l-r > 1 we ensure that l < r and that mid is inside
+            {
+                mid = (l+r)/2;
+                if( source[mid] == word)
+                {
+                    l = mid;
+                    r = mid;
+                }
+                else if ( source[mid].CompareTo(word) > 0)
+                {
+                    r = mid-1;
+                }
+                else
+                {
+                    l = mid+1;
+                }
+            }
+            // we have either l = r or r = l+1 bases cases of recursivity.
+            int pos;
+            if (word.CompareTo(source[l]) <= 0)
+            {
+                pos = l; //
+            }
+            else if(word.CompareTo(source[r]) > 0)
+            {
+                pos = r+1; // 
+            }
+            else
+            {
+                pos = r;
+            }
+            return pos;
+    }
+
 }

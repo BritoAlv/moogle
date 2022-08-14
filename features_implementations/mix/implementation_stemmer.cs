@@ -154,6 +154,7 @@ public static class stemmer
     public static string stem_word (string word, Dictionary<string, string> info)
     {
         // first closest words to "word".
+        // goal of this function is to determine if the word is the dict, so to do that we find its most closest words in the dict,     
         List<string> aa = info.Keys.ToList<string>();
         int position = binary_search(aa, word);
         aa.Insert(position, word);

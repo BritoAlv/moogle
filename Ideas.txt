@@ -1,0 +1,59 @@
+Teniendo una idea de como hacer esto ya puedo empezar a programar el proyecto.
+
+¿Cómo implementar el operador de cercanía?
+¿Cómo implementar el snippet?
+¿Cómo implementar los sinónimos?
+
+Casos de queries respecto al operador de cercanía
+a~b
+a~b~c~...
+a ... b~c~...
+a ... b~c~... d~e~...
+
+Idea Inicial: Primero hacer un ranking usando el tf-idf ignorando que existe el operador de cercanía teniendo en cuenta los símbolos de !*
+
+La relación ~: a~b~c dice que encontrar los documentos que tienen a a,b,c lo más cercano posible entre si, para hacer esto se debe tener en cuenta que un documento que contenga las palabras a,b,c alejadas (100) palabras de distancia debe ser menos importante que un documento que contenga las palabras a,b supercercanas y contenga  c pero alejado, o sea, una idea es decir para cada palabra hayar cuantas palabras hay a una distancia "cercana" de ella digamos 30, palabras, y usar esto para rank los documentos, si dos documentos tienen el mismo ranking o sea en un intervalo de una cantidad fija de palabras tienen la misma cantidad de palabras relacionadas por el ~, hallamos el menor intervalo que contiene a todas las palabras y usamos esto para decidir que documento es más importante, esto hará un ranking de los documentos basados en la proximidad, finalmente este resultado lo intersecaremos con los documentos devueltos por el tf-idf, por ejemplo conocidos los documentos del tf-idf, 
+
+
+
+10                 10
+20                  3
+3                   4
+4                  56
+5                   
+56                  
+29
+5
+4
+10
+
+8
+10
+3
+4
+67
+56
+90
+3
+11
+39
+12
+
+Si hay 0 palabras cercanas sumar la menor distancia entre todas las palabras que posee de la query.
+
+Explicación del algoritmo en términos sencillos,
+
+Recalco que las palabras de la query son linked to the link_dict en algo como revisar si está si no está intentar determinar si el stemer la pone en alguna clase en caso afirmativo tomar esa clase, en caso negativo la palabra no aparece en ee docuemtno y pr tanto tf-idf 0. en esta sección también se implementa los sinónimos. y lo de las faltas de ortografia teniendo en cunta que la palabra no aparezca en algun documento o algoa así. Stop WOrds remove also
+ 
+Paso 1: Realizar un ranking d elos documentos basado en tf-if sin importar las palabras de la uery.
+
+Paso 2: Para cada operador de cercanía hacer un ranking, de los documentos usando el algoritmos anterior.
+
+Paso 3: Mezclar los rankings de operadores de cercanía dado que la parte entera del resultado es la cantidad de palabras cercanas por documento, ahora el algoritmo para hacer el ranking final es el siguiente, recorremos el array mezclado y si el documento.
+
+Decimos que dos palabras estan cercanas si están a una distancia de a lo más 200 (este número debe determinarse estadisticamente) carácteres, finalmente para cada palabra de la relación determinamos cuantas palabras cercanas tiene nos quedamos con la que más tenga y there it goes.
+Finalmente teniendo el intervalo con la mayor cantidad de palabras cercanas, ahora quedaría dado el intervalo que obtuvimos hallar su tamaño definido como el menor start y el mayor end. 
+
+El snippet, usar binary search para determinar el menor intervalo que contiene la mayor cantidad de posibles de la query, quitar las encontradas y ejecutar el algoritmo de nuevo hasta finalmente reducirlo a ninguna palabra cuando el snippet se pase de 500 carcteres por ejemplo, parar.
+
+Los sinónimos añadirlos en algun método de mix keys of the dict a la hora de hacer la query, o sea decimos que dos palabras representn lo mismo. this is everything tha was left for start implementing moogle.  

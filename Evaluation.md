@@ -1,4 +1,4 @@
-# GGuía para la evaluación
+# Guía para la evaluación
 
 La evaluación consta de tres partes:
 

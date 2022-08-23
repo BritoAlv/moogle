@@ -1,3 +1,4 @@
+*te voy a dedicar todas mis mañanas desde ahora hasta que se acabe to'esto*
 Teniendo una idea de como hacer esto ya puedo empezar a programar el proyecto.
 
 ¿Cómo implementar el operador de cercanía?
@@ -56,4 +57,190 @@ Finalmente teniendo el intervalo con la mayor cantidad de palabras cercanas, aho
 
 El snippet, usar binary search para determinar el menor intervalo que contiene la mayor cantidad de posibles de la query, quitar las encontradas y ejecutar el algoritmo de nuevo hasta finalmente reducirlo a ninguna palabra cuando el snippet se pase de 500 carcteres por ejemplo, parar.
 
-Los sinónimos añadirlos en algun método de mix keys of the dict a la hora de hacer la query, o sea decimos que dos palabras representn lo mismo. this is everything tha was left for start implementing moogle.  
+Los sinónimos añadirlos en algun método de mix keys of the dict a la hora de hacer la query, o sea decimos que dos palabras representn lo mismo. this is everything tha was left for start implementing moogle.
+
+Nuestro proyecto tiene varias componentes que deben funcionar lo más independiente entre sí,
+
+1- el stemmer tengo que entenderlo y lograr en el caso de que es una sola palabra, su función en el proyecto es la siguiente, primero disminuir la cantidad de palabras en un documento, y dado una palabra de la query y las palabras de un documento encontrar si esa palabra se puede emparejar, esa palabra tiene que haber aparecido en el corpues total, para evitar las palabras ocn faltas de ortografía,  y no haber aparecido entre las palabras del documento.
+
+2- el algoritmo de levensthein será usado en las palabras con faltas de ortografía o sea, que no aparecen en el corpus, asumiendo que cada palabra del corpus no tiene faltas de ortografía.
+
+3- el snippet funciona dado un documento y las query words de él o sea las posiciones del diccionario donde hay que buscar las palabras.
+
+4- hay una ranking function que toma los resultados del tf-idf y de cada operador de cercanía y los mezcla entre todos.
+
+5 - hay un corpus que contiene todas las palabras del documento con su idf, y un trie que se usa para el autocompletado.
+
+6 - el objeto documento que contiene un diccionario con todas sus palabras y sus linked words(esto lo hace el stemmer), también contiene otro diccionario con cada palabra del lined dict donde cada palabra del linked list contiene su tf,idf y sus tupla de posiciones.
+
+ 7 - el algoritmo del snippet es el siguiente, (facil de implementar por fuerza bruta pero como optimizar eso) haber estudiado programación competitiva.
+ 
+Dado un array de tamaño N, un intervalo k <= N, y m colores, algunas posiciones del array son marcadas con uno de los m colores, hallar el subarray de k elementos que contiene la mayor cantidad de distintos colores, devolver los colores encontrados en dicho array y la cantidad.
+
+Está claro que para realizar esto hay que transversar el array, la idea sería hacerlo solamente una vez, so el algoritmo es usar un diccionario y un array para ir iterando el array y contar la mayor cantidad de palabras distintas en un intervalo de tamaño k, esto lo voy a normalizar, ahora que hacer con las restantes palabras, ejecutar el algoritmo de nuevo con las restantes palabras, maybe one option and it seems by now what i'm going to do.
+
+Dado un documento podemos almacenar cuantas palabras de la query contiene así sabemos cuando detener este algoritmo. P
+ 
+ 8 - el algoritmo de cercanía works in the following way, definimos dos palabras cercanas si están a una distancia menor de 50 caracteres, para cada posición contar la cantidad de palabras cercanas a ella, y quedarnos con la mejor, esto es el ranking general, después calcular el tamaño del menor intervalo que contiene a las palabras y.
+ 
+
+9 - las palabras de la query son procesadas siempre para hacerles el tf-idf space vector model, pero bueno para cada palabra de la query en cada documento tenemos el siguiente árbol de decisión.
+
+1 - la palabra está en el documento y linked with itself.: 
+2 - la palabra está en el documento y linked with more words.:
+3 - la palabra no está en el corpus.
+
+para cada documento tendremos una query específica (ya las linked words) , y esto es lo que le pasamos a las funciones de ranking.
+
+10 - como implementar la query trnasform to especific document (esto coge las palabras de la uery original, los sinónimos , y el link dict de el documento)
+
+Primero guardamos en un array las palabras de la query que están en el corpus y las que no:
+
+Ahora teniendo esta información vamos a cada documento, para cada palabra de la query, si la palabra no está en el corpus, buscamos si tiene algún sinonimo en el documento si lo tiene, buscamos su linked y lo añadimos a la query for ese document.
+
+De esto queda explicito que el operador de cercanía debe saber como actuar cuando se le pasa una o cero palabras como argumento.
+
+Una palabra sin faltas de ortografía está en el documento si al aplicarle el stemmer queda linked con al menos una palabra. Esto es después de haber realizado el link_dict.
+
+Deal with synonyms: Para evitar en la query hallar los sinonimos de una palabra tratemos de juntarlos a la hora de hacer el documento, entonces sería así primero ver si el sinonimo está en el documento, juntar sus info como lo hice a la hora de link two words. 
+
+Que hacer con las stop words en la query, solamente las voy a tener en cuenta para el operadr de cercanía en cualquier otro caso las elimino. Las stop words tienen que ser definidas estadisticamente no con un array con todas las que hay. algo así como aparecen en el 80% de los docuentos y hay almenos 20 documetos.
+
+Si la palabra está en el corpus, (podemos aplicarle el stemmer), verificamos si está en el documento si está buscamos su linked y esto es lo que mandamos a las ranking functions.
+
+El corpus contiene un trie y un diccionario con todas las palabras, what else is missing from moogle estructure, los operadores a la hora de hacer el ranking por tf-idf implementamos los operadores de aparece, no aparece, bla, bla.
+
+Suggestion es lo que ejecuta levensthein, quiero de alguna manera decirle al usuario que tan importantes fue cada palabra de la query para el documento robar github idea.
+
+Esto es el fin de la parte exterior a la programación.
+
+cuando se carga el proyecto salga un cartel de loading que se actualize en tiempo real con la creación de la base de datos.
+sha256 para chequear si los documentos son los mismos, o sea un sistema para detectar nuevos archivos, 
+última búsqueda history of searches,
+progress in search bar
+
+Como deal with tildes, las voy a mantener porque hay palabras que significan todo lo opuesto, la mayuscula si será totalmente ignorada, porque no hay como distinguir entre una mayuscula que aparece al princpio de una oración y otra que aparece como nombre de algo, aunque el snippet si debe devolver con mayúscula y tildes.
+
+El stemmer necesita cierta estructura de datos para funcionar pués sucede lo siguiente el tiene dos funcionalidades, la primera es solamente ejecutada a la hora de crear el corpus, en esta parte se devuelve un diccionario de tipo string string, que es el link_dict, este diccionario works well, *devuelve las keys sorted*,  ahora given a random word we need to be able to get the most closest words to it, una talla como, en el momento en que vamos a analizar la query, creamos un array con las key del dict y realizamos eso, that seems something that can be done, now después que acabamos con la query volvemos a a hacer null eso, esto lo hago para ahorrar espacio en memoria. RAM, finalmente respecto a los sinónimos como mexclar todo eso bueno tenemo s que tener ese array of words y nuevamente realizar eso, probaré si teniendo ese array en memoria que tanta memoria ram se usa, ...
+
+El operador de cercanía, dadas k palabras para hallar su cercanía, para cada posición de las k palabras hallamos ¿Cuantás palabras hay cercanas a ella?, digamos que hay m, guardamos en un array las posiciones que hicieron posible este resultado, teniendo en cuenta que si m = 0, guardamos la palabra más cercana a ella, con esto podemos hallar la mínima distancia. el operador de cercanía ha de ser implementado al estilo max, o sea guarda un máximo temporal recoorre hasta que de. definir una función que dado una palabra calcule el número y ejecutar la función sobre todas las palabras.
+
+Teniendo en cuenta que si hay 0 words closest to it we return the minimal distance between the two words.
+
+Recapitulemos sobre el stemmer y su implementación, para el pinchar bien el necesita tener todas las palabras ordenas en un string[] de words, esto es para el segundo método, las alternativas son ordenas las keys en el dict después de haberlo hecho y mantenerlas ordenadas, esto es posible pués después que lo creemos podemos rehacerlo con las keys sorted, lo de los sinonimos lo que va a hacer es mix keys, so don't lose anything, y lo de las palabras de la query necesita tener las palabras más cercana a ella, aclarar que buena optimización es hcerle saber al diccionario que las palabras también están indexadas, is there a way to implement a dict like that, that has a mix method, a closest_keys method, and a sort method. keeping access by key. Algo como que el stemmer original devuelva un diccionario y a partir de este se construya un objeto inventado x mi, que me permita mix two keys, the most easy estructure is two arrays, one that stores the keys and other that stores the values, this allow mix key and get closest_words, easily but not get element by key
+
+
+Let's try to face the problem using hash and bla bla bla, tengo un string[] A de tamaño M con sus words sorted, voy a crear otro string[] B de igual tamaño que a cada elemento de A le voy a asociar un índice de B y de forma que asocied[word] = B[indice] donde asocied[word] es una función que se ejecutará en tiempo constante.
+
+
+"alvaro" "amen" "calvo" 
+Dado un sorted string[] words necesito una función f.
+
+0 - que vaya de A a (0,m-1) 
+1 - sobreyectiva
+2 - y que sea en tiempo constante calcularla.
+
+Esto sería ideal pués de esta forma podemos realizar nuestras operaciones en tiempo constante:
+
+1 - obtener el valor de una key, constante por la función
+2 - obtener las palabras más cercanas a una dada, logaritmico por binary search
+3 - mix two keys just make its value equal.
+
+Recall that we can make this estructure operable with the stemmer algorithm, because it just will take a dict to work. Lo que si no me queda claro ahora es como hacer la información final del documento, bueno el documento queda representado por su texto, este texto es necesario para ejecutar el algoritmo del snippet por eso debe estar en memoria, aunque bueno no sería mala idea comprobar si cargarlo desde el disco a la hora de implementar el snippet reduce la velocidad de la query, bueno eso podría ser una pequeña idea sobre async, sync, await y eso. Con ese string text, se hace un diccionario cuyas keys son las palabras de el texto, y su value es un objeto de tipo info, que contiene información relevante de cada palabra, ahora con las keys de este dict aplicamos el stemmer y el resultado de eso lo guardaremos en la estructura que estoy creando, en memoria como parte del documento, esto lo necesito para asociar las palabras de la query, finalmente el otro stemmer algorithm debe venir preparado para los sinonimos cuando se mezclen los sinonimos después de haber acabado este proceso, hacemos un mix en el diccionario original del documento el resultado de este mix, sera un diccionario que es lo que representa el documento. El snippet no le hace falta creo tener en memoria, I suggest do this mix after loading all the documents so that  the idf doesnt mess up. Entonces el algoritmo del stemmer respecto a las palabras de la query haría lo siguiente localizaría las maś cercanas a ella porque tenemos eso sorted lo podemos hacer con binary search o bueno en caso de emergencia también guardamos los índices de las keys en el dict, aplicamos el stemer y sacamos nuestras conclusiones. Puede haber la posibilidad de que realizar este proceso para cada palabra de la query para cada documento, sea un problema en términos de perfomance, in other words sería super ideal poder determinar si una palabra está en el documento en tiempo constante, 
+
+
+Mi idea ahora es la siguiente, ir por cada documento, por cada palabra de la query, y determinar si está ahi, viendo si la palabra está en el documento, si no está, y está en el corpus le aplicamos el stemmer con sus palabras cercanas a ver si la agrupa con alguna palabra que esté en el documento y aquí está el arroz del arroz, ya que si pudieramos dado el corpus aplicarle el stemmer a todas sus palabras y tener una manera de determinar si las palabras relacionadas con ella alguna está en el documento esto sería brutal porque toda esta información ya la tendríamos en memoria, y nos ahorraríamos tener qu
+
+Cambio total de planes sobre como deal con el stemmer, aplicaré el stemmer sobre todas las palabras del corpus obteniendo un dict<string, (string, string> donde a cada palabra del corpus le asocio la palabra relacionada a ella por la cual la voy a identificar, después a cada uno de estos value le asocio todas las palabras que están asociadas a ella, dict<string, string[]>.
+
+Ahora recorreré cada uno de los objetos de tipo string[] y para cada documento haré una mezcla de los objetos info (o sea si dos o más palabras del mismo documento son relacionadas juntaré su info en el documento), esto me garantizará que a la hora de hacer la query el proceso looks fast, ... . This procedure is relying in the fact the stemmer works nice.
+
+Entonces para resumir:
+
+- aplicar el stemmer a todas las words in the corpus
+- a cada palabra en el corpus le asignamos una linked_word, de forma que en la lista de esa linked_word aparece esa palabra y por tanto cada palabra de el corpus está en una lista
+- a algunas palabras del corpus(las que son linked) le asignamos una lista de palabras.
+- ahora para cada documento revisamos todas esas listas, si esas listas,  identificamos todas las palabras del documento que están en esa lista, y sus objetos de tipo info los mezclamos. tomando como root la primera palabra que se encuentre, entonces a la hroa de hacer la query determinamos si una palabra está en el documento revisando la lista que se le asignó a esa palabra y comprobando si tiene al menos una palabra del documento si la tiene encontramos la primera nos dirigimos al documento y y ya tenemos el vector con las posiciones, el tf-idf de esa palabra en el documento. Si la palabra no está podemos devolver un vector nulo o algo así, no estoy claro que pasa cuando una palabra no está en un documento imagino que el tf sea 0.
+- una pequeña optimización es solamente considerar los documentos que contengan al menos una palabra de la query. 
+
+Comparo esto con a versión sin stemmer, la palabra se busca directamente en el diccionario aka, se busca en el diccionario del corpus, se busca después en las listas, pero la cosa es que las listas son de tamaño < 10 son may seem like constant.
+
+El algoritmo del snippet debe ejecutarse dos veces o de alguna manera la primera vez tener un secondary array something like that. y recordar normalizarlo.
+ 
+Que falta ¿Aparentemente ya todo works in order?
+
+Let's check
+- create documents parallel with corpus.
+- stemm and index corpus.
+- create tf-idf, and stem documents separately.
+- design query object
+- snippet
+- cercanía
+- operadores
+
+
+Las mayúsculas las quitaré, sin embargo las tildes no, el stemmer que se las arregle con las tildes. 
+
+Use Merge Sort for doing the algorithms of snippet and cercania, anyways, how to deal with synoyms my first idea was to mix up its keys, que tan malo puede ser eso. 
+
+El ejemplo mas claro es instituciones de la habana vs universidad de la habana, how to deal with that queda claro que no se deben mezclar las keys siempre so debe haber algun algoritmo que extrae información del corpus in this sense, y que influya también en el score, otro bug que tengo es a la hora de intersecar los results, digamos que tengo estos dos documentos:
+
+1 - programación es estudiado en universidades distintas de la habana
+2 - se estudia biologia en la universidad de la habana, 
+
+query: programación universidad~habana
+ordenados por tf-idf: 1, 2
+ordenados por cercania, queda 2, 1
+
+La pregunta es como deal with results, o sea la query se interpreta como documentos que contangan las palabras programación, universidad, habana y que contenga las palabras programación y universidad lo más cerca posible, el resultado del operador del cercanía te dice que ambas palabras tienen las palabras a buscar lo suficientemente cerca pero en el segundo documento están más cerca. so we need a ranking function that takes all this into account, if we use the interseccion function, what if 
+
+voy a usar otra raning functionq que es la cnatidad de palabras que contiene de la query el documento ++  el menor intervalo que las contiene todas, finalmente como hacer el score, y calcular para cada documento su posición promedio, finalmente sort the documents by that. La información obtenida de aka puede ser reusable por el snippet, por lo que es mejor guardar toda esa info in a public place.
+
+Otro problema interesante es esta query
+
+programación universidades de de la habana
+programación Universidad de la Habana
+
+creo que acabo de entender porque el score debería ser menor con respecto a las stemmed words. 
+
+El problema surge de lo siguiente supón q hay una cafetería llamada Pollos Hermanos y que nuestra busqueda es Pollos Hermanos para obtener información sobre esa cafetería, el problema es que nuestro algoritmo no se va a enterar de que le mande a buscar por un nombre y no por unas palabras random. How to deal with this¿?.
+
+Podemos hacer lo siguiente a la hora de hacer el diccionario de cada documento mantener las palabras independientemente de si on escritas con mayusucla o minuscula, esto serían los info objects, ahora para las palabras escritas con mayusculas en el texto utilizar su info n otros links pero ella misma se queda  ligada con sus info. (esto haría que una query dada por Universidad, solamente busque donde Universidad aparece con mayúscula y no con minuscula), eso resuelve el problema de Window. 
+
+Necesito Merge Sort porque parece que la estructura va a esar (palabra, start, end), anyways.
+
+I notice that if i do the link of the words es posible que el documento tenga una mejor combinación de las palabras de la query usando linked words, pero esto afecta a la hora de hacer el snippet solamente
+
+Rankings:
+- tf-idf
+- cantidad de palabras de la query en el documento + 1/ ( menor intervalo donde están contenidas )
+- operador de cercanía
+
+Nuestro algoritmo de snippet halla el menor intervalo donde hay la mayor cantidad posible de palabras de la query, pero el problema es que 
+si se usan las linked word_s es posible que se devuelva un intervalo que no contenga palabraas de la query sino linked de ellas, que puede significar esto: 1 - no hay query_words pero si linked o hay ambas , basicamente la precisión aumenta cuando aumenta la cantidad de palabras. 
+
+Decisiones que faltan para comenzar implementación:
+
+Lo primero es como usar los sinónimos y los stemms porque esta es la cosa, de algo estoy seguro es que cada query será interpretada de una forma diferente por cada documento, sucede lo siguiente el corpus quedará todo lo linked que se quiera, la cosa es la siguiente la query puede ser ayuda solidaria a Cuba, es posible que nuestro documento contenga la palabra ayuda, solidaria e Cuba pero no en la misma idea, es psoible que en la parte que se refieran a Cuba lo que diga sea Cuba ayudó a Nicaragua de forma humanitaria, mi algoritmo sería capaz de tomar esto en cuenta porque tomaría ayudar como ayudó, humanitaria sinónimo de solidaria. y todo nais pero el problema es que si el usuario busca piedra alquimista, y nuestro documento lo que contiene es las piedras encontradas por los alquimistas, puede que devuelva esa parte, en fin no tiene consiencia respecto a las palabras originales de la query, recall that si una palabra es un nombre se devolverá sus posiciones exactamente que aparecen con mayuscula en el texto, o sea el usuario debe estar conciente de usar correctamente las mayúsuculas, como le podemos dar conciencia al moogle sobre ese tema, bueno una idea que parece lo más nais, es que si a una lista ordenada se le quitan elementos sigue ordenada, entonces si deseasemos buscar textualmente una palabra en cierto documento lo que haríamos sería remover de la lista todas las linked_words, o se podría hacer lo contrario, que por defecto busque textualmente alguna palabra en especifico lo que habría que hacer sería obtener las posiciones de la palabra pero sin estar linked with others, fijate que la opción de buscar una palabra textualmente una palabra como está escrita estará activada por dfecto si la query tiene una sola palabra, esto permite evitar las mayúsculas, como implementamos esto de buscar literalmente porque podemos obtener si la palabra está en el documento, podemos obtener su linked pero no tenemos como borrar de su linked las palabras que no son ella, en fin la manera de solucionar esto es ocupar más memoria ram diciendole a cada objeto de tipo posición (palabra, start, end), esta estructura es buena en el sentido de que permite indentificar cada posición por un ID, desventaja consume ram cantidad, tendríamos siempre en la memoria RAM, las siguientes cosas, el trie, el corpus con cada palabra asociada a su linked word, y cada linked_word su linked_list, y cada documento indexado con sus palabras (word, start, end).  For each word also have an object that has min pos and max pos, use the mergesort, logic to do that. 
+
+Javascript alert cuando inicia el moogle ( un mensaje de no mostrar más)
+
+So the moogle will do a strict search with some words in the query, if only if they are typed with mayus, but this doenst solve the problem because, if we want to find Universidad estrictamente, or Los Pollos Hermanos there is no way to do it, but if we want to find Pollos Hermanos, becuase that is something like a name en la universidad de la habana will get searched, now something like Pollos Ricos as a name how can be diferentiated from los pollos de mi casa son ricos, algo como en esa universidad de la habana no se estudia programación vs en la Universidad de la Habana, so en particular las mayusculas, las minusculas, están en el objeto de cada documento, meintras que en el corpus están mezcladas, a la hora de hacer le query, introduciré un operador como $ para indicar buscar en ese documento la palabra exacta introducida por el usuario. This is a all practicamente, recordar que a la hora d ehacer el snippet señalar palabras azules de el query. o sea el snippet tiene qeu know that, ahora que ya tenemos el proyecto aparentemente a full, voy a escribir en una hoja todas las implementaciones antes de empezar a programar, ah otra cosa como es calculado el tf-idf, bueno las cosas se calculan inciialmente antes de hacer el stmmer, digo tf, idf, ahora a la hora de hacer el stemmer o cosas se calcula el promedio. So no problem with that. Let's begin the fun.
+
+
+
+
+
+
+  
+
+
+ 
+
+
+
+
+
+
+
+

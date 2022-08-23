@@ -1,4 +1,0 @@
-cuando se carga el proyecto salga un cartel de loading que se actualize en tiempo real con la creación de la base de datos.
-sha256 para chequear si los documentos son los mismos, o sea un sistema para detectar nuevos archivos, 
-última búsqueda history of searches,
-progress in search bar

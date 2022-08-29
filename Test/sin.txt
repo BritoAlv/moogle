@@ -1,4 +1,3 @@
-key,synonyms
 andar,caminar
 abundante,mucho bastante
 acabar,terminar finalizar

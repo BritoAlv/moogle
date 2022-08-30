@@ -1,4 +1,4 @@
-Teniendo una idea de como hacer esto ya puedo empezar a programar el proyecto.
+Teniendo unaA idea de como hacer esto ya puedo empezar a programar el proyecto.
 
 ¿Cómo implementar el operador de cercanía?
 ¿Cómo implementar el snippet?

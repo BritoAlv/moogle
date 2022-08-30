@@ -494,3 +494,6 @@ Content/
 .vscode/
 Ideas.txt
 .gitignore
+MoogleEngine/moogle.sublime-project
+MoogleEngine/moogle.sublime-workspace
+.gitignore

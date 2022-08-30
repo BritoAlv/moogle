@@ -1,12 +1,13 @@
 ﻿namespace MoogleEngine;
 
+// with corpus. access to the classes of the Library Class corpus
+using corpus;
 
 public static class Moogle
 {
     public static SearchResult Query(string query)
     {
         // Modifique este método para responder a la búsqueda
-
         SearchItem[] items = new SearchItem[3]
         {
             new SearchItem("Hello World", "No tengo ganas de hacer el Moogle", 0.9f),

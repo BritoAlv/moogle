@@ -107,6 +107,7 @@ public void process(string text, int id, Dictionary<string, info_word_doc> bdd)
                 bdd[item.Key].docs[id] = new info_word(pos_to_json[item.Key]);
             }
             bdd[item.Key].idf++;
+            bdd[item.Key].docs[id].weight = tf_to_json[item.Key];
         }
     }
 

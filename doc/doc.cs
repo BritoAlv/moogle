@@ -5,7 +5,6 @@ public class doc
     public string name;
     public string text;
     public string path;
-    public int cant_palabras;
     public double norm;
     public doc(string name, int id)
     {

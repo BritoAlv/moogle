@@ -491,6 +491,7 @@ Test/.vscode/tasks.json
 Test/Program.cs
 Test/Content/
 Content/
+cache/
 .vscode/
 Ideas.txt
 .gitignore

@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\corpus\corpus.csproj" />
+    <ProjectReference Include="..\tokenizer\tokenizer.csproj" />
   </ItemGroup>
 
 

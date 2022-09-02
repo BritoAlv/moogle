@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\tokenizer\tokenizer.csproj" />
+    <ProjectReference Include="..\doc\doc.csproj" />
+  </ItemGroup>
+
 </Project>

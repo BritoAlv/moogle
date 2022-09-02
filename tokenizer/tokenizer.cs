@@ -4,7 +4,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 
-public class token
+public partial class token
 {
     List<string> hashes;
 

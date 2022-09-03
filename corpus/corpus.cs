@@ -45,7 +45,9 @@ public partial class corpus
         /*
         at this point apply the synonimus to update linked words.
         */
-        //k.sinonyms(bd);         
+        k.sinonyms(bd);
+
+        k.group_similar_words(bd);         
     }
     
 /*

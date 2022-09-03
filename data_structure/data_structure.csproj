@@ -6,9 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\doc\doc.csproj" />
-    <ProjectReference Include="..\data_structure\data_structure.csproj" />
-  </ItemGroup>
-
 </Project>

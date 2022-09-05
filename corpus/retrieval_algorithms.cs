@@ -5,6 +5,22 @@ using d_t_h;
 
 public partial class corpus
 {
+    public double request_word_idf(string word, bool allow_similar)
+    {
+        if (allow_similar)
+        {
+            double total = 0;
+            int cont = 0;
+            foreach (var item in this.bd[this.bd[word].linked].similar)
+            {
+                total = total + this.bd[item].idf;
+                cont++;                    
+            }
+            return total/(double)(cont+0.00000001);
+        }    
+        return this.bd[word].idf;
+        
+    }
     public bool word_in_corpus(string word)
     {
         if (this.bd.ContainsKey(word))
@@ -21,7 +37,7 @@ public partial class corpus
         if (allow_similar)
         {
             double total = 0;
-            int cont = 1;
+            int cont = 0;
             foreach (var item in this.bd[this.bd[word].linked].similar)
             {
                 if (this.bd[item].docs.ContainsKey(id))
@@ -30,7 +46,7 @@ public partial class corpus
                 cont++;                    
                 }
             }
-            total = total / (double)cont;
+            total = total / (double)(cont+0.00000001);
             if(this.bd[word].docs.ContainsKey(id))
             {
             return Math.Max(total, this.bd[word].docs[id].weight);

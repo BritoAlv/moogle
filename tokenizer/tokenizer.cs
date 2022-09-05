@@ -75,7 +75,7 @@ public void process(string text, int id, Dictionary<string, info_word_doc> bdd)
                 pos_to_json[word].Add(i);        
             }
         }
-        int len = tf_to_json.Count();
+        double len = tf_to_json.Values.Sum(); // cant of words in the document. allowing repeated ones.
         foreach (var item in tf_to_json)
         {
             bdd[item.Key].idf++;

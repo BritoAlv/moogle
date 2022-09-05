@@ -7,7 +7,7 @@ public partial class corpus
     public string[] words;
     public doc[] the_docs;
     public int cant_docs;
-    Dictionary<string, info_word_doc> bd;
+    public Dictionary<string, info_word_doc> bd;
     public corpus(bool use_cache_stemmer = false)
     {
         this.bd = new Dictionary<string, info_word_doc>();
@@ -36,6 +36,24 @@ public partial class corpus
         at this point we have to update tf-idf.
         */
         k.update_tf_idf(bd, this.cant_docs);
+
+        /*
+        at this point we can set the norm of each document.
+        */
+
+        for (int i = 0; i<cant_docs; i++) 
+        {
+            double norm = 0;
+            foreach (var item in this.bd) // loop through the words 
+            {
+                if (item.Value.docs.ContainsKey(i)) 
+                {
+                    norm = norm + (item.Value.docs[i].weight * item.Value.docs[i].weight);
+                }
+            }
+            the_docs[i].norm = Math.Sqrt(norm);
+        }
+        
 
         /*
         at this point apply the stemmer to update linked words.

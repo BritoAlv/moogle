@@ -1,7 +1,7 @@
 namespace docc;
 public class info_word_doc
 {
-    public int idf; // store idf of this word
+    public int idf; // store number of docs that contain this word
     public string linked; // store linked word
     public IEnumerable<string>? similar; // in case of being root store similar words
     public Dictionary<int, info_word> docs;  // store positions of this word in the docs.

@@ -10,7 +10,7 @@ public partial class token
         {
             foreach (var key_word_in_doc in word.Value.docs)
             {
-                key_word_in_doc.Value.weight = key_word_in_doc.Value.weight * Math.Log( ((double)cant_docs)  / ((double)(word.Value.idf+1)));
+                key_word_in_doc.Value.weight = key_word_in_doc.Value.weight * Math.Log( ((double)cant_docs+1.01)  / ((double)(word.Value.idf+1)));
             } 
         }
     }

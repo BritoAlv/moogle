@@ -83,6 +83,27 @@ public class id_element<U>: IComparable<id_element<U>> where U:IComparable
         return this.val.CompareTo(other.val);
     }
 
+    public bool equal(id_element<U> other)
+    {
+        return this.id == other.id;
+    }
+
+    // given a list of objects of type id_element<U> return the number of diferent ids in it.
+    public int number_diferent(List<id_element<U>> A)
+    {
+        List<int> ids = new List<int>();
+        foreach (var item in A)
+        {
+            if (!ids.Contains(item.id))
+            {
+                ids.Add(item.id);
+            }            
+        }
+        return ids.Count;
+    }
+
+    
+
 
 }
 

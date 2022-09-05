@@ -71,7 +71,7 @@ public partial class corpus
         //if the word is not found return an empty list.
         if (!this.word_in_corpus(word)) 
         {
-            return new List<int>;
+            return new List<int>();
         }
         if (allow_similar)
         {

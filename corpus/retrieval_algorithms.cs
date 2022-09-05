@@ -31,6 +31,10 @@ public partial class corpus
     }
     public double request_word_weight(string word, int id, bool allow_similar = false)
     {
+        if (!this.word_in_corpus(word)) 
+        {
+            return 0;
+        }
         // before call this function check if word exists in the corpus.
         // search in the doc[id] the weight of this word and return it. 
         // if the word is not found return 0.
@@ -53,9 +57,9 @@ public partial class corpus
             }
             return total;
         }
-        if(this.bd[word].docs.ContainsKey(id))
+        else if(this.bd[word].docs.ContainsKey(id))
         {
-        return this.bd[word].docs[id].weight;
+            return this.bd[word].docs[id].weight;
         }
         return 0;
     }
@@ -65,6 +69,10 @@ public partial class corpus
         // before call this function check if word exists in the corpus.
         // search in the doc[id] the positions where appears the word and return it.
         //if the word is not found return an empty list.
+        if (!this.word_in_corpus(word)) 
+        {
+            return new List<int>;
+        }
         if (allow_similar)
         {
             List<List<int>> a = new List<List<int>>();
@@ -78,7 +86,7 @@ public partial class corpus
             }
             return idk.merge_k_list(a.ToArray());
         }
-        if(this.bd[word].docs.ContainsKey(id))
+        else if(this.bd[word].docs.ContainsKey(id))
         {
         return this.bd[word].docs[id].pos;
         }

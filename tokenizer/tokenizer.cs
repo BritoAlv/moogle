@@ -22,7 +22,8 @@ public static string QuickHash(string secret)
 }
 
 public void process(string text, int id, Dictionary<string, info_word_doc> bdd)
-{    
+{   
+
     // compute hash of the text,
     string hash = QuickHash(text);
     // un parche 
@@ -37,6 +38,38 @@ public void process(string text, int id, Dictionary<string, info_word_doc> bdd)
         // generate json and write this hash to the list of common hashes.
         Dictionary<string , double> tf_to_json = new Dictionary<string, double>();
         Dictionary<string, List<int>> pos_to_json = new Dictionary<string, List<int>>();
+
+        ///////////////////////////////////////////////////////////////////
+        // DEFINING A PROCEDURE TO ADD WORDS TO THE DICTS, .
+        ///////////////////////////////////////////////////////////////////
+
+        void add_word(string item, int i)
+        {
+            if (!bdd.ContainsKey(item))
+            {
+                bdd[item] = new info_word_doc(item);
+            }
+            if (!bdd[item].docs.ContainsKey(id))
+            {
+                bdd[item].docs[id] = new info_word();
+            }
+            if(!tf_to_json.ContainsKey(item))
+            {
+                tf_to_json[item] = 0;
+            }
+            if(!pos_to_json.ContainsKey(item))
+            {
+                pos_to_json[item] = new List<int>();
+            }                
+            tf_to_json[item]++;
+            bdd[item].docs[id].pos.Add(i);
+            pos_to_json[item].Add(i); 
+        }
+
+        ///////////////////////////////////////////////////////////////////
+        // START LOOPING THE QUERY.
+        ///////////////////////////////////////////////////////////////////
+
         for (int i = 0; i < text.Length; i++)
         {
             // reach an index that is alphanumeric
@@ -51,28 +84,14 @@ public void process(string text, int id, Dictionary<string, info_word_doc> bdd)
                     word = word + text[i];
                     i = i+1;
                 }
-
-                if (!bdd.ContainsKey(word))
+                ///////////////////////////////////////////////////////////////////
+                // Will add the word in lower and if it is the case the upper also.
+                ///////////////////////////////////////////////////////////////////
+                add_word(word,i);
+                if (char.IsUpper(word[0]))
                 {
-                    bdd[word] = new info_word_doc(word);
+                    add_word(word.ToLower(),i);
                 }
-                if (!bdd[word].docs.ContainsKey(id))
-                {
-                    bdd[word].docs[id] = new info_word();
-                }
-
-                if(!tf_to_json.ContainsKey(word))
-                {
-                    tf_to_json[word] = 0;
-                }
-                if(!pos_to_json.ContainsKey(word))
-                {
-                    pos_to_json[word] = new List<int>();
-                }                
-
-                tf_to_json[word]++;
-                bdd[word].docs[id].pos.Add(i);
-                pos_to_json[word].Add(i);        
             }
         }
         double len = tf_to_json.Values.Sum(); // cant of words in the document. allowing repeated ones.

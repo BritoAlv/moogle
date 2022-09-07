@@ -9,5 +9,6 @@
   <ItemGroup>
     <ProjectReference Include="..\corpus\corpus.csproj" />
     <ProjectReference Include="..\data_structure\data_structure.csproj" />
+    <ProjectReference Include="..\tokenizer\tokenizer.csproj" />
   </ItemGroup>
 </Project>

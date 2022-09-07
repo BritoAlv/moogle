@@ -39,7 +39,7 @@ public partial class query
                 // an algorithm that will loop through all the windows of size fixed_length and take
                 // the best, puede ser el caso en que no haya ninguna, o whatever.
                 ////////////////////////////////////////////////////////////////////////////////
-                sum_over_each_operator = Math.Max(looper(yep,mini_results, fixed_length), sum_over_each_operator);
+                sum_over_each_operator = sum_over_each_operator + looper(yep,mini_results, fixed_length);
             }
         }
         double min_interval = (mini_results.Count>0)?mini_results.Min():0;

@@ -21,6 +21,8 @@ public partial class query
     public double[] score_by_cercania;
     public double[] score_by_min_interval;
     public Dictionary<int, List<id_element<int>>> relevant_info;
+
+    public Dictionary<int, double[]> medallas;
     
     List<string> word_to_suggest;
     double norm;
@@ -43,6 +45,7 @@ public partial class query
         this.op_cerc = new List<string[]>();
         this.words_to_request = new HashSet<string>();
         this.word_to_suggest = new List<string>();
+        this.medallas = new Dictionary<int, double[]>();
 
         ////////////////////////////////////////////////////////////////////////////// 
         // start looping the query to get its word;
@@ -132,14 +135,11 @@ public partial class query
                 if(item.Contains("~"))
                 {
                     string[] clo = item.Split("~", StringSplitOptions.RemoveEmptyEntries);
+                    clo = clo.Where(y => (x.word_in_corpus(y) && !forbidden_words.Contains(y))).ToArray();
                     op_cerc.Add(clo);
                     for (int i = 0; i < clo.Length; i++)
                     {
-                        if (x.word_in_corpus(clo[i]) && !forbidden_words.Contains(clo[i])) // find only words that are not forbidden and are in the corpus.
-                        {
                             closest_words.Add(clo[i]); // keep track of all words that are related by ~
-                        }
-                        
                     }
                 }
             }
@@ -204,6 +204,7 @@ public partial class query
     // we loop through the docs to and stay with the ones that doens't contain forbidden words and contain only words.
     for (int i = 0; i <x.cant_docs; i++)
     {
+        medallas[i] = new double[3];
         bool d = true;
         /*
         forbidden words.
@@ -256,9 +257,20 @@ public partial class query
     // document is better having these three scores is what follows.
     //////////////////////////////////////////////////////////////////////////////
 
-    for (int i = 0; i < x.cant_docs; i++)
+
+    ////////////////////////////////////////////////////////////////////////////////
+    // Select best results based on medals, the medals in the category  min interval 
+    // are the better ones. 
+    /////////////////////////////////////////////////////////////////////////////////
+    Tuple<int, string,string,string>[] best_docs = get_medals();
+    
+   
+    // first ten elements in the medallas array son nuestro resultados.
+
+    foreach( var doc in  best_docs)
     {
-        Console.WriteLine(i + " " + x.the_docs[i].name + " " + score_by_tfidf[i]+ "  " + score_by_cercania[i] + "  " + score_by_min_interval[i]);
+        Console.WriteLine(x.the_docs
+        [doc.Item1].name + " " + doc.Item2+doc.Item3+doc.Item4);
     }
 
      

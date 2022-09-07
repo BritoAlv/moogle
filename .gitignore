@@ -485,10 +485,8 @@ features_implementations/corpus/.vscode/tasks.json
 features_implementations/corpus/.vscode/launch.json
 features_implementations/query/.vscode/launch.json
 features_implementations/query/.vscode/tasks.json
-Test/Test.csproj
 Test/.vscode/launch.json
 Test/.vscode/tasks.json
-Test/Program.cs
 Test/Content/
 Content/
 cache/

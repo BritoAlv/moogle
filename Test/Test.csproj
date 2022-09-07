@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\corpus\corpus.csproj" />
+    <ProjectReference Include="..\doc\doc.csproj" />
+    <ProjectReference Include="..\data_structure\data_structure.csproj" />
+    <ProjectReference Include="..\query\query.csproj" />
+  </ItemGroup>
+
+</Project>

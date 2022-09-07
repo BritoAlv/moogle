@@ -8,35 +8,34 @@ public static class sort
             A[j] = temp;
     }
 
-        static int partition(Tuple<int, double>[] A, int low, int high)
+    static int partition(Tuple<int, double>[] A, int low, int high)
+    {
+  
+        // pivot
+        Tuple<int, double> pivot = A[high];
+  
+        // Index of smaller element and
+        // indicates the right position
+        // of pivot found so far
+        int i = (low - 1);
+  
+        for (int j = low; j <= high - 1; j++)
         {
-  
-            // pivot
-            Tuple<int, double> pivot = A[high];
-  
-            // Index of smaller element and
-            // indicates the right position
-            // of pivot found so far
-            int i = (low - 1);
-  
-            for (int j = low; j <= high - 1; j++)
+        // If current element is smaller 
+        // than the pivot
+            if (A[j].Item2 < pivot.Item2)
             {
-  
-            // If current element is smaller 
-            // than the pivot
-                if (A[j].Item2 < pivot.Item2)
-                {
-  
                 // Increment index of 
                 // smaller element
-                    i++;
-                    swap(A, i, j);
-                }     
-            }
-            swap(A, i + 1, high);
-            return (i + 1);
-            
-            }
+                i++;
+                swap(A, i, j);
+            }     
+        }
+        swap(A, i + 1, high);
+        return (i + 1);
+        
+    }
+
     public static void quickSort(Tuple<int, double>[] A, int low, int high)
     {
         if (low < high)

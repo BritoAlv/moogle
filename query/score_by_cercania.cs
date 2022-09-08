@@ -102,7 +102,7 @@ public partial class query
                 }
             }
             
-            if (current_distinct > answer && (yep[index_end].val - yep[index_start].val) < interval_length )
+            if (current_distinct > answer && ((yep[index_end].val - yep[index_start].val) < interval_length) )
             {
                 answer = current_distinct;
                 st = index_start;

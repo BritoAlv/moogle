@@ -8,7 +8,7 @@ public class Test
 	{   
 		//corpus a = new corpus(true);
 		//query b = new query("titi~piedra~filosofal", a);
-    	corpus a = new corpus(false);
+    	corpus a = new corpus(true);
 		Console.WriteLine("Empieza A Poner Frases");
 		while (true) 
 			{

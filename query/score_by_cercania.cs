@@ -13,7 +13,7 @@ public partial class query
         ////////////////////////////////////////////////////////////////////////////////
         List<double> mini_results = new List<double>(); // store length of each minimal interval.
         double sum_over_each_operator = 0;
-        int fixed_length = 1000;
+        int fixed_length = 500;
         foreach (var close_words in this.op_cerc) // close_words array of words 
         {
             // get a score for each set of words related by ~
@@ -59,6 +59,7 @@ public partial class query
         int answer = 0;
         int st = 0;
         int et = 0;
+        int interval_length = 100000; // for comparing two windows with the same number of words
         for (int i = 0; i < yep.Count; i++)
         {
             int index_start = i;
@@ -66,8 +67,8 @@ public partial class query
             int current_distinct = 0;
             Dictionary<int, int> counts = new Dictionary<int, int>();
 
-            int start = Math.Max(0, yep[i].val-500);
-            int end = Math.Min(yep[yep.Count-1].val ,yep[i].val+500);
+            int start = Math.Max(0, yep[i].val-fixed_length/2);
+            int end = Math.Min(yep[yep.Count-1].val ,yep[i].val+fixed_length/2);
             for (int r = i; r >= 0; r--)
             {
                 if (yep[r].val < start)
@@ -100,11 +101,13 @@ public partial class query
                    index_end = r;
                 }
             }
-            if (current_distinct > answer)
+            
+            if (current_distinct > answer && (yep[index_end].val - yep[index_start].val) < interval_length )
             {
                 answer = current_distinct;
                 st = index_start;
                 et = index_end;
+                interval_length = (yep[index_end].val - yep[index_start].val);
             }            
         }
         if (answer > 1)

@@ -1,6 +1,6 @@
 public static class sort
 {
-        // i will do quicksort in the double values.
+    // i will do quicksort in the double values.
     static void swap(Tuple<int, double>[] A, int i, int j)
     {
             Tuple<int, double> temp = A[i];

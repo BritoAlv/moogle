@@ -7,8 +7,8 @@ public class Test
 	public static void Main()
 	{   
 		//corpus a = new corpus(true);
-		//query b = new query("titi~piedra~filosofal", a);
-    	corpus a = new corpus(true);
+		//query b = new query("noche", a);
+      	corpus a = new corpus(true);
 		Console.WriteLine("Empieza A Poner Frases");
 		while (true) 
 			{
@@ -35,6 +35,7 @@ public class Test
 				}
 				Console.WriteLine(" ");			
 				Console.WriteLine("Se demoró todo este tiempo mi rey: " + aw.Elapsed);
-			}	 
+				Console.WriteLine("////////////////////////////////////////////////////////////////////");
+			}	      
 	}			
 }

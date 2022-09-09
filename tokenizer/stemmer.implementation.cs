@@ -30,7 +30,7 @@ public static class stemmer
         {
             if(words[i].Length >= lex +2)
             {
-                if( !vocals.Contains(words[i][lex]) & !vocals.Contains(words[i][lex+1]))
+                if( !vocals.Contains(words[i][lex]) && !vocals.Contains(words[i][lex+1]))
                 {
                     result.Add(words[i]);
                     words.RemoveAt(i);

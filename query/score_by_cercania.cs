@@ -39,14 +39,14 @@ public partial class query
                 // an algorithm that will loop through all the windows of size fixed_length and take
                 // the best, puede ser el caso en que no haya ninguna, o whatever.
                 ////////////////////////////////////////////////////////////////////////////////
-                sum_over_each_operator = sum_over_each_operator + looper(yep,mini_results, fixed_length);
+                sum_over_each_operator = sum_over_each_operator + looper(yep,mini_results, fixed_length, the_snippets[doc_index]);
             }
         }
         double min_interval = (mini_results.Count>0)?mini_results.Min():0;
         this.score_by_cercania[doc_index] = sum_over_each_operator + min_interval;
     }
 
-    public static double looper(List<id_element<int>> yep,  List<double> min_interval, int fixed_length)
+    public static double looper(List<id_element<int>> yep,  List<double> min_intervals, int fixed_length, snippet A)
     {
 
         // define first window because the length of the window may be greater than the length of the last
@@ -56,9 +56,9 @@ public partial class query
         // sus palabras, este menor intervalo se lo añadimos a la lista min_interval.
 
         // get first window, yep contains at east two elements.
-        int answer = 0;
-        int st = 0;
-        int et = 0;
+        int answer = 0; // final results
+        int st = 0; // final results
+        int et = yep.Count-1; // final results
         int interval_length = 100000; // for comparing two windows with the same number of words
         for (int i = 0; i < yep.Count; i++)
         {
@@ -85,6 +85,7 @@ public partial class query
                    index_start = r;
                 }
             }
+
             for (int r = i+1; r < yep.Count; r++)
             {
                 if (yep[r].val > end)
@@ -101,8 +102,13 @@ public partial class query
                    index_end = r;
                 }
             }
-            
-            if (current_distinct > answer && ((yep[index_end].val - yep[index_start].val) < interval_length) )
+            if (current_distinct == answer &&  ((yep[index_end].val - yep[index_start].val) < interval_length))
+            {
+                st = index_start;
+                et = index_end;
+                interval_length = (yep[index_end].val - yep[index_start].val);
+            }
+            else if (current_distinct > answer)
             {
                 answer = current_distinct;
                 st = index_start;
@@ -120,8 +126,8 @@ public partial class query
             // Steps to do that:
             //  
             ////////////////////////////////////////////////////////////////////////
-            int start_min = st;
-            int end_min = et;
+            int start_min = yep[st].val;
+            int end_min = yep[et].val;
             int score_by_min_in = yep[et].val-yep[st].val;
             Dictionary<int, int> count  = new Dictionary<int, int>();
             for (int e = st; e <= et; e++)
@@ -154,9 +160,10 @@ public partial class query
                         }
                 }
             }
+            A.Add(new Tuple<int, int>(start_min, end_min), count.Keys.ToList());
             if (score_by_min_in > 0)
             {
-                min_interval.Add((double)(1)/(double)score_by_min_in);
+                min_intervals.Add((double)(1)/(double)score_by_min_in);
             }
         return answer;    
         }

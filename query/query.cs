@@ -23,7 +23,7 @@ public partial class query
     public Dictionary<int, List<id_element<int>>> relevant_info;
 
     public Dictionary<int, double[]> medallas;
-    
+    public snippet[] the_snippets;
     List<string> word_to_suggest;
     double norm;
 
@@ -46,7 +46,7 @@ public partial class query
         this.words_to_request = new HashSet<string>();
         this.word_to_suggest = new List<string>();
         this.medallas = new Dictionary<int, double[]>();
-
+        this.the_snippets = new snippet[x.cant_docs];
         ////////////////////////////////////////////////////////////////////////////// 
         // start looping the query to get its word;
         //////////////////////////////////////////////////////////////////////////////
@@ -203,7 +203,8 @@ public partial class query
     List<int> index_of_docs_to_consider = new List<int>();
     // we loop through the docs to and stay with the ones that doens't contain forbidden words and contain only words.
     for (int i = 0; i <x.cant_docs; i++)
-    {
+    {   
+        the_snippets[i] = new snippet(i);
         medallas[i] = new double[3];
         bool d = true;
         /*
@@ -271,6 +272,8 @@ public partial class query
     {
         Console.WriteLine(x.the_docs
         [doc.Item1].name + " " + doc.Item2+doc.Item3+doc.Item4);
+        Console.WriteLine("Este es el snippet chama: ");
+        Console.WriteLine(the_snippets[doc.Item1].generate_snippet(x));
     }
 
      

@@ -40,6 +40,10 @@ public partial class query
                     if (count[result[j].id] == 0)
                     {
                         dint++;
+                        // snipet work
+                        // save a position of a query word in the snippet de respuesto. por si no hay un intervalo q la contenga en los snippets ya obtenidos.
+                        this.the_snippets[doc_index].respuesto[result[j].id] = result[j].val;
+                        // end snippet work
                     }
                     count[result[j].id]++;
                     if(dint == cc) // aument i so that get the min intervalo ending at such j.
@@ -60,10 +64,26 @@ public partial class query
                     }      
                 }
                 this.score_by_min_interval[doc_index] = cc + ((double)2) / (double)( score_by_min_in);
+                // snippet work.
+                if (score_by_min_in < 300) // if the interval is small enough keep it to the snippet
+                {
+                    this.the_snippets[doc_index].Add(new Tuple<int, int>(start_min, end_min), count.Keys.ToList());
+                }
+                // ends.
             }
             else
             {
-                score_by_min_interval[doc_index] = 1; 
+                score_by_min_interval[doc_index] = 1;
+                
+                /* snippet work in case the doc contins only one word, show three ocurrences of it in the document.
+                start*/
+                int min = Math.Min(3, result.Count);
+                for (int r = 0; r < min; r++)
+                {
+                    this.the_snippets[doc_index].respuesto[r+100] = result[r].val;
+                }
+                // end
+                 
             }
         } 
     }

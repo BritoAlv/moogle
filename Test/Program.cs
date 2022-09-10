@@ -33,7 +33,13 @@ public class Test
 				{
 					Console.Write(" " + item);	
 				}
-				Console.WriteLine(" ");			
+				Console.WriteLine(" ");
+				Console.Write("Que Bola Con Estas Palabras:");
+				foreach (var item in b.words_to_suggest)
+				{
+					Console.Write(" " + item);	
+				}
+				Console.WriteLine(" ");				
 				Console.WriteLine("Se demoró todo este tiempo mi rey: " + aw.Elapsed);
 				Console.WriteLine("////////////////////////////////////////////////////////////////////");
 			}	      

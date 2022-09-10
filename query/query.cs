@@ -24,7 +24,7 @@ public partial class query
 
     public Dictionary<int, double[]> medallas;
     public snippet[] the_snippets;
-    List<string> word_to_suggest;
+    public List<string> words_to_suggest;
     double norm;
 
     public query(string s, corpus x)
@@ -44,7 +44,7 @@ public partial class query
         int found_words = 0;
         this.op_cerc = new List<string[]>();
         this.words_to_request = new HashSet<string>();
-        this.word_to_suggest = new List<string>();
+        this.words_to_suggest = new List<string>();
         this.medallas = new Dictionary<int, double[]>();
         this.the_snippets = new snippet[x.cant_docs];
         ////////////////////////////////////////////////////////////////////////////// 
@@ -160,7 +160,7 @@ public partial class query
         {
             tfidf[item.Key] = 0;
             common_words.Add(item.Key);
-            word_to_suggest.Add(item.Key);
+            words_to_suggest.Add(item.Key);
         }
         else
         {

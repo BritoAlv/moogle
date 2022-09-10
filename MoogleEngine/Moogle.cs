@@ -1,7 +1,7 @@
 ﻿namespace MoogleEngine;
 
 // with corpus. access to the classes of the Library Class corpus
-using corpus;
+using corpuss;
 
 public static class Moogle
 {

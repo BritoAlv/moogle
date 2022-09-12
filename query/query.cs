@@ -25,6 +25,7 @@ public partial class query
     public Dictionary<int, double[]> medallas;
     public snippet[] the_snippets;
     public List<string> words_to_suggest;
+    public Tuple<int, string,string,string>[] best_docs;
     double norm;
 
     public query(string s, corpus x)
@@ -263,18 +264,18 @@ public partial class query
     // Select best results based on medals, the medals in the category  min interval 
     // are the better ones. 
     /////////////////////////////////////////////////////////////////////////////////
-    Tuple<int, string,string,string>[] best_docs = get_medals();
+    best_docs = get_medals();
     
    
     // first ten elements in the medallas array son nuestro resultados.
 
-    foreach( var doc in  best_docs)
+/*     foreach( var doc in  best_docs)
     {
         Console.WriteLine(x.the_docs
         [doc.Item1].name + " " + doc.Item2+doc.Item3+doc.Item4);
         Console.WriteLine("Este es el snippet chama: ");
         Console.WriteLine(the_snippets[doc.Item1].generate_snippet(x));
-    }
+    }*/ 
 
      
 

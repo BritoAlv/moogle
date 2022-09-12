@@ -3,11 +3,11 @@
 <PageTitle>El Moogle!</PageTitle>
 <div class=input-container>
 <input  id="input" @bind="query" placeholder="Que Quieres Buscar">
-<span id="suggestion" > Que Quieres Buscar </span>
+<span id="suggestion" >  </span>
 </div>
 <button type="default" class="button" @onclick="RunQuery">🔍 Buscar</button>
 
-<button type="default" class="button" @onclick="RunQuery">Sugerencias  <a id="number_suggestions" style="color:red"> (3) </a>  </button>
+<button type="default" class="button" @onclick="RunSuggestions"> Sugerencias  <a id="number_suggestions" style="color:red"> (3) </a>  </button>
 
 <ul class="results">
 @foreach (var item in result.Items()) {
@@ -20,7 +20,7 @@
 }
 </ul>
 
-<span style="font-size: 40px; font-family: Ubuntu Mono">  with speed of <a id=query_search style="color:red"> 0s </a> , This search was powered by: </span>
+<span style="font-size: 30px; font-family: Ubuntu Mono">  with speed of <a id=query_search style="color:red"> 0s </a> , This search was powered by: </span>
   
 
 <img style="width:200px; position: relative; top: -5px" src="./logo.png" >
@@ -30,8 +30,11 @@
 @code {
     private string query = "";
     private SearchResult result = new SearchResult();
-
+    private Moogle moogle = new Moogle();
     private void RunQuery() {
-        result = Moogle.Query(query);
+        result = moogle.Query(query);
+    }
+    private void RunSuggestions(){
+        return;
     }
 }

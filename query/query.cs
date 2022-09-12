@@ -7,7 +7,7 @@ using d_t_h;
 public partial class query
 {
     string q; // the query
-    Dictionary<string, int> words; // words in the query with its id.
+    public Dictionary<string, int> words; // words in the query with its id.
     List<string[]> op_cerc; // words that are related by ~.
     HashSet<string> only_words; // words that have to be forced.
     HashSet<string> forbidden_words; // words that can't be.

@@ -112,7 +112,7 @@ public partial class query
             }
             else
             {
-                r[0] = " ";
+                r[0] = "X";
             }
 
 
@@ -130,7 +130,7 @@ public partial class query
             }
             else
             {
-                r[1] = " ";
+                r[1] = "X";
             }
 
             if (medallas[sum_of_scores[i].Item1][2] >=6)
@@ -147,7 +147,7 @@ public partial class query
             }
             else
             {
-                r[2] = " ";
+                r[2] = "X";
             }
             medals[i] = new Tuple<int, string, string, string>(sum_of_scores[i].Item1, r[0], r[1], r[2]);
         }

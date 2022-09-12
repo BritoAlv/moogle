@@ -1,4 +1,5 @@
 using corpuss;
+using qquery;
 public class snippet
 {
     public Dictionary<int,  bool> already_words; // id vs words is in the snippet
@@ -29,8 +30,18 @@ public class snippet
 
         string pedazo_texto(Tuple<int, int> A)
         {
-            int start = Math.Max(0, A.Item1-50);
-            int end = Math.Min(x.the_docs[this.index_document].text.Length-1, A.Item2+50);
+            int start = A.Item1-100;
+            while (start >= 0 && char.IsLetterOrDigit(x.the_docs[this.index_document].text[start]))
+            {
+                start--;
+            }
+            start = Math.Max(0, start);
+            int end = A.Item2+100;
+            while (end <= x.the_docs[this.index_document].text.Length-1 && char.IsLetterOrDigit(x.the_docs[this.index_document].text[end]))
+            {
+                end++;
+            }
+            end = Math.Min(x.the_docs[this.index_document].text.Length-1, end);
             return x.the_docs[this.index_document].text.Substring(start, end-start);            
         }
 
@@ -68,7 +79,7 @@ public class snippet
         pos_to_snippet = pos_to_snippet.Where( (a, index) => not_inside_other_tuple(a, index ) ).ToList();      
         foreach (var item in pos_to_snippet)
         {
-            snippet = snippet + pedazo_texto(item) + "\n\n";
+            snippet = snippet + "<br>" + pedazo_texto(item) + "</br>";        
         }
         return snippet;
     }

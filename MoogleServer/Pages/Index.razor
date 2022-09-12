@@ -20,7 +20,7 @@
 }
 </ul>
 
-<span style="font-size: 30px; font-family: Ubuntu Mono">  with speed of <a id=query_search style="color:red"> 0s </a> , This search was powered by: </span>
+<span style="font-size: 30px; font-family: Ubuntu Mono">  with speed of <a id=query_search style="color:red"> @time </a> , This search was powered by: </span>
   
 
 <img style="width:200px; position: relative; top: -5px" src="./logo.png" >
@@ -29,10 +29,12 @@
 
 @code {
     private string query = "";
+    public string time = "0s";
     private SearchResult result = new SearchResult();
     private Moogle moogle = new Moogle();
     private void RunQuery() {
         result = moogle.Query(query);
+        time = moogle.time;
     }
     private void RunSuggestions(){
         return;

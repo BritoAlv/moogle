@@ -6,6 +6,7 @@ using qquery;
 
 public class Moogle
 {
+    public string time = "0s";
     public corpus x = new corpus(true);
     public SearchResult Query(string la_query)
     {
@@ -13,7 +14,7 @@ public class Moogle
         a.Start();
         query c = new query(la_query, this.x);
         a.Stop();
-        Console.WriteLine(a.Elapsed);
+        this.time = ((double)(a.ElapsedMilliseconds)/1000).ToString() + "s";
         List<SearchItem> items = new List<SearchItem>();
         foreach (var doc in c.best_docs)
         {

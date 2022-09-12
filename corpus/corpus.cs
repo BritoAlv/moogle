@@ -5,6 +5,7 @@ using tokenizer;
 public partial class corpus
 {
     public string[] words;
+    public trie the_trie;
     public doc[] the_docs;
     public int cant_docs;
     public Dictionary<string, info_word_doc> bd;
@@ -30,6 +31,12 @@ public partial class corpus
         // i need this to do the levensthein algorithm 
         words = bd.Keys.ToArray();
         Array.Sort(words, (x, y) => x.Length.CompareTo(y.Length));
+        the_trie = new trie();
+        foreach (var word in words)
+        {
+            the_trie.insert(word);
+        }
+        
         // end of stuff.
 
         /*
@@ -65,7 +72,9 @@ public partial class corpus
         */
         k.sinonyms(bd);
 
-        k.group_similar_words(bd);         
+        k.group_similar_words(bd);
+
+
     }
     
 /*

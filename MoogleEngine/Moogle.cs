@@ -1,20 +1,24 @@
 ﻿namespace MoogleEngine;
-
+using System.Diagnostics;
 // with corpus. access to the classes of the Library Class corpus
 using corpuss;
+using qquery;
 
-public static class Moogle
+public class Moogle
 {
-    public static SearchResult Query(string query)
+    public corpus x = new corpus(true);
+    public SearchResult Query(string la_query)
     {
-        // Modifique este método para responder a la búsqueda
-        SearchItem[] items = new SearchItem[3]
+        Stopwatch a = new Stopwatch();
+        a.Start();
+        query c = new query(la_query, this.x);
+        a.Stop();
+        Console.WriteLine(a.Elapsed);
+        List<SearchItem> items = new List<SearchItem>();
+        foreach (var doc in c.best_docs)
         {
-            new SearchItem("Hello World", "No tengo ganas de hacer el Moogle", 0.9f),
-            new SearchItem("Hello World", "Que fastidio tener que hacer esto en las vacaciones", 0.8f),
-            new SearchItem("Hello World", "Life goes on and on and on", 0.1f),
-        };
-
-        return new SearchResult(items, query);
+            items.Add(new SearchItem(x.the_docs[doc.Item1].name + " " + doc.Item2+doc.Item3+doc.Item4, c.the_snippets[doc.Item1].generate_snippet(x)));
+        }
+        return new SearchResult(items.ToArray(), la_query);
     }
 }

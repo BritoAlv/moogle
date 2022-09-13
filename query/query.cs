@@ -191,7 +191,7 @@ public partial class query
     // stuff of ****
     //////////////////////////////////////////////////////////////////////////////
 
-    double max = tfidf.Values.Max();
+    double max = (tfidf.Count>0)?tfidf.Values.Max():0;
     foreach (var item in boosted_words)
     {
         tfidf[item.Key] = max*item.Value;

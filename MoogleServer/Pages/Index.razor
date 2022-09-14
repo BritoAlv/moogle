@@ -105,7 +105,13 @@ else
     private void RunSuggestions(){
     	if(number_suggestions > 0)
     	{
-    		number_suggestions--;
+    		string suggested_query = moogle.get_suggestion(query);
+    		if(!(query == suggested_query))
+    		{
+    			query = suggested_query;
+    			number_suggestions--;
+    			RunQuery();
+    		}
     	};
         return;
     }

@@ -4,11 +4,12 @@ using tokenizer;
 
 public partial class corpus
 {
-    public string[] words;
-    public trie the_trie;
-    public doc[] the_docs;
-    public int cant_docs;
-    public Dictionary<string, info_word_doc> bd;
+    public string[] words; // all the words in the corpus.
+    public int[] index; // need this to do levensthein algorithm.
+    public trie the_trie; // well a trie to autocomplete.
+    public doc[] the_docs; // information about each doc.
+    public int cant_docs; // total of docs.
+    public Dictionary<string, info_word_doc> bd; // the info is here.
     public corpus()
     {
         bool use_cache_stemmer = true; // by default it will use the stemmer cache
@@ -29,7 +30,9 @@ public partial class corpus
             k.process(the_docs[i].name, the_docs[i].text, i, bd);
         }
         
-        // Logic For Updating the hashes.txt file
+        ////////////////////////////////////////////////////////////////////////////// 
+        //  logic for updating hashes.txt and decide if use stemmer
+        //////////////////////////////////////////////////////////////////////////////
 
         if (k.new_hashes.Count > 0 || !(k.hashes_on_txt.Count == k.old_hashes.Count))
         {
@@ -47,9 +50,31 @@ public partial class corpus
 
         System.IO.File.WriteAllLines("../cache/hashes.txt", hashes_now);        
 
-        // i need this to do the levensthein algorithm 
+        ////////////////////////////////////////////////////////////////////////////// 
+        // Levensthein Algorithm Part;
+        ////////////////////////////////////////////////////////////////////////////// 
         words = bd.Keys.ToArray();
         Array.Sort(words, (x, y) => x.Length.CompareTo(y.Length));
+
+        // this index will store in the position k the first position in the words array
+        // of a word with length k.
+        index = new int[31];
+        for (int i = 1; i < 31; i++)
+        {
+            for (int j = 0; j < words.Length; j++)
+            {
+                if(words[j].Length == i)
+                {
+                    index[i] = j; 
+                    break;
+                }
+            }
+        }
+
+        ////////////////////////////////////////////////////////////////////////////// 
+        //  Trie Part
+        //////////////////////////////////////////////////////////////////////////////
+
         the_trie = new trie();
         foreach (var word in words)
         {

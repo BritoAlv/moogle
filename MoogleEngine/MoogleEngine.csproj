@@ -11,6 +11,7 @@
     <ProjectReference Include="..\tokenizer\tokenizer.csproj" />
     <ProjectReference Include="..\data_structure\data_structure.csproj" />
     <ProjectReference Include="..\query\query.csproj" />
+    <ProjectReference Include="..\string_algs\string_algs.csproj" />
   </ItemGroup>
 
 

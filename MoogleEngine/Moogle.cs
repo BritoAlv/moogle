@@ -39,7 +39,7 @@ public class Moogle
             {
                 int d = string_algs.Levensthein(old_word, x.words[i]);
                 //Console.WriteLine("Levenstein de " +word + " y " + b.wordds[i] + " es " + d);
-                if (d <= edit_distance)
+                if (d < edit_distance)
                 {
                     edit_distance = d;
                     new_word = x.words[i];

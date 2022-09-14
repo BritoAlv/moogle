@@ -1,5 +1,4 @@
 namespace qquery;
-using corpuss;
 using d_t_h;
 public partial class query
 {
@@ -59,7 +58,7 @@ public partial class query
         int answer = 0; // final results
         int st = 0; // final results
         int et = yep.Count-1; // final results
-        int interval_length = 100000; // for comparing two windows with the same number of words
+        int interval_length = 1000000000; // for comparing two windows with the same number of words
         for (int i = 0; i < yep.Count; i++)
         {
             int index_start = i;

@@ -92,9 +92,12 @@ public class snippet
             {
                 int id = (c.words[word] <= 9)?c.words[word]:10;
                 string Similar = similar[0].ToString().ToUpper()+similar.Substring(1);
-                string pattern = @"\b" + similar + "|" + Similar + @"\b"; 
-                string reemplazo = "<mark style = \"background: " + x.colors[id] + "\">" + similar + "</mark>";
-                snippet = Regex.Replace(snippet, pattern, reemplazo );
+                string pattern1 = @"\b" + similar + @"\b"; 
+                string pattern2 = @"\b" + Similar + @"\b";
+                string reemplazo1 = "<mark style = \"background:" + x.colors[id] + "\"> " + similar + " </mark>";
+                string reemplazo2 = "<mark style = \"background:" + x.colors[id] + "\"> " + Similar + " </mark>";
+                snippet = Regex.Replace(snippet, pattern1, reemplazo1 );
+                snippet = Regex.Replace(snippet, pattern2, reemplazo2 );
             }
             
         }

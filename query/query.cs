@@ -168,7 +168,7 @@ public partial class query
             double idf_word = x.request_word_idf(item.Key, similar_words.Contains(item.Key));
             tfidf[item.Key] = (tfidf[item.Key] / len ) * (x.cant_docs) / (double)(idf_word+1) ;
             norm = norm + (tfidf[item.Key])*(tfidf[item.Key]);
-            if (idf_word >= (0.895)*x.cant_docs && (x.cant_docs > 20) && !(closest_words.Contains(item.Key)))
+            if (idf_word >= (0.93)*x.cant_docs && (x.cant_docs > 20) && !(closest_words.Contains(item.Key)))
                 {
                     if(!only_words.Contains(item.Key))
                     {

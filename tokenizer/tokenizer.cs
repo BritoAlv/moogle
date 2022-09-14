@@ -6,11 +6,15 @@ using System.Text.Json;
 
 public partial class token
 {
-    List<string> hashes;
+    public List<string> hashes_on_txt; // load the hashes in disk.
+    public List<string> new_hashes; // new hashes
+    public List<string> old_hashes;
 
     public token()
     {
-        hashes = System.IO.File.ReadAllLines("../cache/hashes.txt").ToList();
+        hashes_on_txt = System.IO.File.ReadAllLines("../cache/hashes.txt").ToList();
+        new_hashes = new List<string>();
+        old_hashes = new List<string>();
     }
 
 public static string QuickHash(string secret)
@@ -21,7 +25,7 @@ public static string QuickHash(string secret)
     return Convert.ToHexString(secretHash); // return the hash.
 }
 
-public void process(string text, int id, Dictionary<string, info_word_doc> bdd)
+public void process(string doc_name,string text, int id, Dictionary<string, info_word_doc> bdd)
 {   
 
     // compute hash of the text,
@@ -29,9 +33,9 @@ public void process(string text, int id, Dictionary<string, info_word_doc> bdd)
     // un parche 
     text = text + " ";
     // un parche
-    if (!this.hashes.Contains(hash))
+    if (!this.hashes_on_txt.Contains(hash))
     {
-
+     
         // we have to split the texxt and while.
         // update the dict bdd.
         // update a temp dict to generate the two jsons.
@@ -104,16 +108,15 @@ public void process(string text, int id, Dictionary<string, info_word_doc> bdd)
         // serialize the dicts and save to the cache folder but how id it with the name of the hash.
         string jsonString1 = JsonSerializer.Serialize(tf_to_json);
         string jsonString2 = JsonSerializer.Serialize(pos_to_json);
-        File.WriteAllText("../cache/"+hash+"1.json", jsonString1);
-        File.WriteAllText("../cache/"+hash+"2.json", jsonString2);
-        hashes.Add(hash);
-        System.IO.File.WriteAllLines("../cache/hashes.txt", hashes);
+        File.WriteAllText("../cache/"+doc_name+"1.json", jsonString1);
+        File.WriteAllText("../cache/"+doc_name+"2.json", jsonString2);
+        new_hashes.Add(hash);
     }
     else
     {
         // load the json of the doc and update its words in the databse.
-        Dictionary<string , double> tf_to_json = JsonSerializer.Deserialize<Dictionary<string, double>>(File.ReadAllText("../cache/"+hash+"1.json"));
-        Dictionary<string , List<int>> pos_to_json = JsonSerializer.Deserialize<Dictionary<string, List<int>>>(File.ReadAllText("../cache/"+hash+"2.json"));
+        Dictionary<string , double> tf_to_json = JsonSerializer.Deserialize<Dictionary<string, double>>(File.ReadAllText("../cache/"+doc_name+"1.json"));
+        Dictionary<string , List<int>> pos_to_json = JsonSerializer.Deserialize<Dictionary<string, List<int>>>(File.ReadAllText("../cache/"+doc_name+"2.json"));
 
         foreach (var item in tf_to_json)
         {
@@ -128,6 +131,7 @@ public void process(string text, int id, Dictionary<string, info_word_doc> bdd)
             bdd[item.Key].idf++;
             bdd[item.Key].docs[id].weight = tf_to_json[item.Key];
         }
+        old_hashes.Add(hash);
     }
 
 }

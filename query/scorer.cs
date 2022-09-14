@@ -38,7 +38,7 @@ public partial class query
             // end of scoring by min interval
             //////////////////////////////////////////////////////////////////////////////////////////////////
         }
-        double max = score_by_tfidf.Max();
+        double max = (score_by_tfidf.Length > 0)?(score_by_tfidf.Max()):0;
         if (max == 0){max = 1;}
         foreach (var doc_index in index_of_docs_to_consider)
         {

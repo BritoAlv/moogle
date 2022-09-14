@@ -14,11 +14,17 @@ public partial class query
         // the number of words that are in the words_to-request.
 
         // este número es la cantidad de palabras que hay en el mejor resultado respecto al scorer de cercanía.
-        double cercania_max_words = (Math.Floor(score_by_cercania.Max()) > 0)?Math.Floor(score_by_cercania.Max()):1;
+        
+        double cerc_max = (score_by_cercania.Length > 0)?score_by_cercania.Max():1;
+        double min_int_max = (score_by_min_interval.Length>0)?score_by_min_interval.Max():1;
+
+        // above double numbers because .Max() return error if there are no elements.
+
+        double cercania_max_words = (Math.Floor(cerc_max) > 0)?Math.Floor(cerc_max):1;
         Tuple<int, double>[] sum_of_scores = new Tuple<int, double>[score_by_tfidf.Length];
         // este número es la cantidad de palabras que hay en el mejor resultado respecto al scorer de min_interval .
-        double min_interval_max_words = (Math.Floor(score_by_min_interval.Max()) > 1)?Math.Floor(score_by_min_interval.Max()):100;
-        double mininterval_len = score_by_min_interval.Max() - min_interval_max_words;
+        double min_interval_max_words = (Math.Floor(min_int_max) > 1)?Math.Floor(min_int_max):100;
+        double mininterval_len = min_int_max - min_interval_max_words;
         int stop = Math.Min(10, score_by_cercania.Length);
         Tuple<int, string, string, string>[] medals = new Tuple<int, string, string, string>[stop];
 

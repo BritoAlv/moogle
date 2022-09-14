@@ -7,7 +7,7 @@ using qquery;
 public class Moogle
 {
     public string time = "0s";
-    public corpus x = new corpus(true);
+    public corpus x = new corpus();
     public SearchResult Query(string la_query)
     {
         Stopwatch a = new Stopwatch();

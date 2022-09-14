@@ -9,8 +9,9 @@ public partial class corpus
     public doc[] the_docs;
     public int cant_docs;
     public Dictionary<string, info_word_doc> bd;
-    public corpus(bool use_cache_stemmer = false)
+    public corpus()
     {
+        bool use_cache_stemmer = true; // by default it will use the stemmer cache
         this.bd = new Dictionary<string, info_word_doc>();
         DirectoryInfo location = new DirectoryInfo("../Content");
         FileInfo[] files = location.GetFiles();
@@ -25,8 +26,26 @@ public partial class corpus
             and mix it in the .bd dictionary of the corpus. the object token I just created
             will take care of that, 
             */
-            k.process(the_docs[i].text, i, bd);
+            k.process(the_docs[i].name, the_docs[i].text, i, bd);
         }
+        
+        // Logic For Updating the hashes.txt file
+
+        if (k.new_hashes.Count > 0 || !(k.hashes_on_txt.Count == k.old_hashes.Count))
+        {
+            use_cache_stemmer = false; // if this conditions are hold this mean that there is a change on the content folder so we need to re-run the stemmer
+        }
+        List<string> hashes_now = new List<string>();
+        foreach (var item in k.new_hashes)
+        {
+            hashes_now.Add(item);
+        }
+        foreach (var item in k.old_hashes)
+        {
+            hashes_now.Add(item);
+        }
+
+        System.IO.File.WriteAllLines("../cache/hashes.txt", hashes_now);        
 
         // i need this to do the levensthein algorithm 
         words = bd.Keys.ToArray();

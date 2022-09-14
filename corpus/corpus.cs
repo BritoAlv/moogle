@@ -10,6 +10,22 @@ public partial class corpus
     public doc[] the_docs; // information about each doc.
     public int cant_docs; // total of docs.
     public Dictionary<string, info_word_doc> bd; // the info is here.
+
+    // these are colors to the snippet.
+    public Dictionary<int, string> colors = new Dictionary<int, string>()
+    {
+        {0,"#FF5852"},
+        {1,"#FF9000"},
+        {2,"#FFD300"},
+        {3,"#3DCD49"},
+        {4,"#0089D7"},
+        {5,"#9E44C4"},
+        {6,"#18AF1C"},
+        {7,"#8418AF"},
+        {8,"#FEFF00"},
+        {9,"#0090FF"},
+        {10,"#880303"}
+    };
     public corpus()
     {
         bool use_cache_stemmer = true; // by default it will use the stemmer cache

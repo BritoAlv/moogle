@@ -67,7 +67,7 @@ public partial class query
                 // snippet work.
                 if (score_by_min_in < 300) // if the interval is small enough keep it to the snippet
                 {
-                    this.the_snippets[doc_index].Add(new Tuple<int, int>(start_min, end_min), count.Keys.ToList());
+                    this.the_snippets[doc_index].add_(new Tuple<int, int>(start_min, end_min), count.Keys.ToList());
                 }
                 // ends.
             }

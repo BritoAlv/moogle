@@ -160,7 +160,7 @@ public partial class query
                         }
                 }
             }
-            A.Add(new Tuple<int, int>(start_min, end_min), count.Keys.ToList());
+            A.add_(new Tuple<int, int>(start_min, end_min), count.Keys.ToList());
             if (score_by_min_in > 0)
             {
                 min_intervals.Add((double)(1)/(double)score_by_min_in);

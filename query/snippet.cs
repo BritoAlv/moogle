@@ -1,5 +1,6 @@
 using corpuss;
 using qquery;
+using System.Text.RegularExpressions;
 public class snippet
 {
     public Dictionary<int,  bool> already_words; // id vs words is in the snippet
@@ -15,7 +16,7 @@ public class snippet
         this.respuesto = new Dictionary<int, int>();
     }
 
-    public void Add(Tuple<int, int> A, List<int> ids)
+    public void add_(Tuple<int, int> A, List<int> ids)
     {
         this.positions.Add(A);
         foreach (var item in ids)
@@ -24,7 +25,7 @@ public class snippet
         }
     }
 
-    public string generate_snippet(corpus x)
+    public string generate_snippet(corpus x, query c)
     {
         string snippet = "";
 
@@ -81,6 +82,23 @@ public class snippet
         {
             snippet = snippet + "<br>" + pedazo_texto(item) + "</br>";        
         }
+
+        // this triple loop makes results slower to show but they get colored.
+        foreach (var word in c.words_to_request)
+        {
+            
+            IEnumerable<string> similares = x.bd[x.bd[word].linked].similar;
+            foreach (var similar in similares)
+            {
+                int id = (c.words[word] <= 9)?c.words[word]:10;
+                string Similar = similar[0].ToString().ToUpper()+similar.Substring(1);
+                string pattern = @"\b" + similar + "|" + Similar + @"\b"; 
+                string reemplazo = "<mark style = \"background: " + x.colors[id] + "\">" + similar + "</mark>";
+                snippet = Regex.Replace(snippet, pattern, reemplazo );
+            }
+            
+        }
+
         return snippet;
     }
 

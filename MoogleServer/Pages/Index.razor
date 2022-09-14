@@ -7,7 +7,7 @@
 </div>
 <button type="default" class="button" @onclick="RunQuery">🔍 Buscar</button>
 
-<button type="default" class="button" @onclick="RunSuggestions"> Sugerencias  <a id="number_suggestions" style="color:red"> (3) </a>  </button>
+<button type="default" class="button" @onclick="RunSuggestions"> Sugerencias  <a id="number_suggestions" style="color:red"> (@number_suggestions) </a>  </button>
 
 <div class="box">
     <div class="box-sm red"></div>
@@ -54,12 +54,14 @@ else
     private string query = "";
     public string time = "0s";
     public string actual_suggestion="";
+    public int number_suggestions = 0;
     private SearchResult result = new SearchResult();
     private Moogle moogle = new Moogle();
     private void RunQuery() {
         result = moogle.Query(query);
         time = moogle.time;
         query_done = true;
+        number_suggestions = moogle.the_query.words_to_suggest.Count;
     }
 
     private void actions(KeyboardEventArgs e)
@@ -101,6 +103,10 @@ else
     }
 
     private void RunSuggestions(){
+    	if(number_suggestions > 0)
+    	{
+    		number_suggestions--;
+    	};
         return;
     }
 }

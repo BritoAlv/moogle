@@ -4,6 +4,8 @@
 
 > Proyecto de Programación I. Facultad de Matemática y Computación. Universidad de La Habana. Curso 2021.
 
+
+
 Moogle! es una aplicación *totalmente original* cuyo propósito es buscar inteligentemente un texto en un conjunto de documentos.
 
 Es una aplicación web, desarrollada con tecnología .NET Core 6.0, específicamente usando Blazor como *framework* web para la interfaz gráfica, y en el lenguaje C#.
@@ -14,6 +16,20 @@ La aplicación está dividida en dos componentes fundamentales:
 
 Hasta el momento hemos logrado implementar gran parte de la interfaz gráfica (que es lo fácil), pero nos está causando graves problemas la lógica. Aquí es donde entras tú.
 
+
+## Ejecutando el proyecto
+
+Lo primero que tendrás que hacer para poder trabajar en este proyecto es instalar .NET Core 6.0 (lo que a esta altura imaginamos que no sea un problema, ¿verdad?). Luego, solo te debes parar en la carpeta del proyecto y ejecutar en la terminal de Linux:
+
+```bash
+make dev
+```
+
+Si estás en Windows, debes poder hacer lo mismo desde la terminal del WSL (Windows Subsystem for Linux). Si no tienes WSL ni posibilidad de instalarlo, deberías considerar seriamente instalar Linux, pero si de todas formas te empeñas en desarrollar el proyecto en Windows, el comando *ultimate* para ejecutar la aplicación es (desde la carpeta raíz del proyecto):
+
+```bash
+dotnet watch run --project MoogleServer
+```
 ## Tu misión
 
 Tu misión (si decides aceptarla) es ayudarnos a implementar el motor de búsqueda de Moogle! (sí, el nombre es así con ! al final). Para ello, deberás modificar el método `Moogle.Query` que está en la clase `Moogle` del proyecto `MoogleEngine`.
@@ -99,30 +115,5 @@ Pero si nos quieres ayudar, eres libre de modificar la interfaz gráfica todo lo
 
 La idea original del proyecto es buscar en un conjunto de archivos de texto (con extensión `.txt`) que estén en la carpeta `Content`. Desgraciadamente, nuestro último programador que sabía cargar y leer archivos fue contratado por nuestra compañía enemiga *MoneySoft*. Por lo tanto, tendrás que lidiar con esta parte tú mismo.
 
-## Ejecutando el proyecto
 
-Lo primero que tendrás que hacer para poder trabajar en este proyecto es instalar .NET Core 6.0 (lo que a esta altura imaginamos que no sea un problema, ¿verdad?). Luego, solo te debes parar en la carpeta del proyecto y ejecutar en la terminal de Linux:
 
-```bash
-make dev
-```
-
-Si estás en Windows, debes poder hacer lo mismo desde la terminal del WSL (Windows Subsystem for Linux). Si no tienes WSL ni posibilidad de instalarlo, deberías considerar seriamente instalar Linux, pero si de todas formas te empeñas en desarrollar el proyecto en Windows, el comando *ultimate* para ejecutar la aplicación es (desde la carpeta raíz del proyecto):
-
-```bash
-dotnet watch run --project MoogleServer
-```
-
-## Sobre la ingeniería de software
-
-Por supuesto, queremos que este proyecto sea lo más extensible y mantenible posible, incluso por personas con inteligencia nivel normal, no solo superdotados; así que agradeceríamos que tengas cuidado con la organización, los nombres de los métodos y clases, los miembros que deben ser públicos y privados, y sobre todo, poner muchos comentarios que expliquen por qué haces cada cosa. Sino, luego vendrá algún pobre infeliz (que no será de MatCom) y no sabrá por donde entrarle al proyecto.
-
-## Palabras finales
-
-Hasta aquí las ideas que tenemos **por ahora**.
-
-Como bien sabes, los proyectos de software nunca están completos, y los clientes nunca están satisfechos, así que es probable que en las próximas semanas adicionemos algunas ideas nuevas. Estamos confiados en que tu código será lo suficientemente extensible como para acomodar estas ideas a medida que surjan.
-
-Ah, por otro lado, nuestros diseñadores siguen trabajando en mejorar la interfaz gráfica (están ahora mismo bajo régimen de pan y agua hasta que esto sea vea medianamente bonito). Por lo tanto, es muy probable que te enviemos actualizaciones de `MoogleServer` durante el tiempo que dura el proyecto.
-
-Hasta entonces! 🖖

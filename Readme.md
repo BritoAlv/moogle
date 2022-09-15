@@ -30,9 +30,8 @@ Si estás en Windows, debes poder hacer lo mismo desde la terminal del WSL (Wind
 ```bash
 dotnet watch run --project MoogleServer
 ```
-## Sobre el contenido a buscar
 
-La idea original del proyecto es buscar en un conjunto de archivos de texto (con extensión `.txt`) que estén en la carpeta `Content`.
+En la carpeta ./Content debes poner los .txt que vas a utilizar como base de datos, cada vez que haces un cambio en la carpeta ./Content el Moogle lo determinará y ejecutará el stemmer  (es lento <5 min>), ya la segunda vez no se ejecutará porque usará cache y será rápido.
 
 
 

@@ -1,0 +1,227 @@
+andar,caminar
+abundante,mucho bastante
+acabar,terminar finalizar
+advertir,prevenir avisar
+alterado,nervioso
+altura,elevación
+amplificar,agrandar ampliar
+angustia,malestar pesar preocupación inquietud
+anteojos,gafas espejuelos lentes
+apto,hábil capaz
+armonia,calma paz tranquilidad
+atrapar,capturar
+avaro,tacaño
+barato,económico
+batalla,guerra
+bobo,necio tonto
+boleto,billete
+bonito,hermoso
+cabello,pelo
+cálido,caliente
+calmar,atenuar
+cama,lecho
+camino,sendero via
+cantina,bar
+castigar,sancionar
+cola,rabo
+combate,contienda
+cómodo,confortable
+comprar,adquirir
+comprender,entender
+constitución,estatuto
+crear,inventar
+cumbre,cima cúspide pináculo
+danza,baile
+decir,pronunciar
+defecto,imperfección
+demente,loco lunático chiflado
+desobediente,indisciplinado
+destruir,eliminar
+dicha,alegria felicidad
+ebrio,borracho
+economizar,ahorrar
+edén,paraíso
+educar,enseñar
+elegir,escoger
+elevar,subir levantar alzar
+embrujar,hechizar
+embuste,mentira engaño
+enfurecer,enojar
+enigma,incógnita
+enseñanza,educación
+entero,completo
+escrito,nota
+escuchar,oir atender
+estudiante,alumno
+expresar,exponer
+extraño,raro
+fácil,sencillo simple
+fallecer,morir
+famoso,célebre
+fiel,leal
+flaco,delgado
+flecha,saeta
+formación,instrucción
+fotografía,retrato
+fragmento,pedazo trozo
+frizar,congelar
+garaje,cochera
+generoso,dadivoso
+gigante,enorme
+gordo,obeso
+humildad,modestia
+idéntico,igual
+idioma,lengua
+iluminar,alumbrar
+importe,valor costo
+increíble,impresionante
+indicio,pista
+insolencia,arrogancia
+insulto,agravio ofensa ultraje
+inteligencia,sabiduría
+invariabilidad,uniformidad
+junta,delegacion comité
+labor,trabajo
+lanzar,arrojar tirar
+llano,plano
+lucha,pelea
+maestro,profesor
+magnate,poderoso
+magnífico,espléndido
+matar,asesinar
+miedo,pánico terror
+misericordia,piedad
+momento,instante
+monarca,rey
+montar,cabalgar
+naipe,baraja
+nombrar,designar
+norma,regla
+nunca,jamás
+óleo,aceite
+orar,rezar
+ordenador,computadora
+página,hoja
+parar,detener
+partir,dividir picar
+poco,escaso
+posible,factible
+previo,anterior
+profundo,hondo
+queja,lamento
+querer,pretender
+razón,motivo causa
+reposo,quietud
+robar,hurtar
+rostro,cara
+saber,conocer
+sabio,erudito
+sabroso,rico
+sanar,curar
+sano,saludable
+satisfacer,saciar
+silbar,pitar
+silueta,contorno
+soberbia,altanería
+sombra,oscuridad penunmbra tinieblas
+sumar,agregar adicionar
+tomar,beber
+transcribir,manuscribir
+triunfo,victoria
+valiente,aventurado osado
+valioso,preciado
+veloz,rápido
+vereda,senda
+vivir,habitar
+volver,regresar
+abandonar,retirarse
+abanicar,ventilar
+abarcar,rodear
+abarrotar,llenar completar
+abastecer,dar
+abatir,derribar
+aberrante,anormal inusual
+ablandar,suavizar
+abyecto,vil despreciable
+aceptación,aprobación
+aerolito,meteorito
+además,asimismo
+afable,cordial amable acogedor
+afán,anhelo ansia deseo
+alegre,gozoso jovial
+amanecer,alba
+bolígrafo,pluma
+bondadoso,benévolo
+cerciorar,asegurar corroborar ratificar
+cuestion,asunto
+custodio,vigilante guardián
+determinar,acordar decidir
+dogma,doctrina
+dubitativo,dudoso indeciso
+estimar,tasar valorar
+filosofar,meditar reflexionar
+forúnculo,absceso grano
+fugarse,escaparse
+fugitivo,profugo
+fulgor,resplandor brillo
+gélido,helado frio
+gula,glotonería
+habitante,morador
+heleno,griego
+helar,congelar
+hincar,ensartar hendir clavar
+horadar,perforar agujerear taladrar
+imaginar,concebir pensar
+jarra,recipiente vasija
+jerarquía,grado categoría
+jerga,argot jerigonza
+laborar,trabajar
+litigio,pleito querella
+lucro,utilidad ganancia
+mácula,mancha
+marrón,castaño
+médico,doctor
+mediocre,regular
+meticuloso,escrupuloso minucioso
+motín,rebelión levantamiento revuelta
+mutismo,silencio
+negligencia,descuido
+nitidez,claridad
+nómada,errante
+novicio,inexperto novato
+ocultar,esconder
+olor,aroma perfume
+orbe,mundo planeta
+paciente,tolerante
+pedo,ventoso gas
+perezoso,holgazán
+pomposo,ostentoso
+posponer,aplazar
+premura,apuro
+principio,comienzo origen
+propender,tender inclinarse
+quebradizo,frágil
+quisquilloso,susceptible
+regalo,obsequio presente
+reñir,pelear
+repercusión,consecuencia
+reto,desafío
+rifa,sorteo
+rustico,tosco rural
+sacerdote,cura
+sacudir,agitar
+salpicar,rociar
+saltar,brincar
+sello,estampilla
+simulacro,práctica ensayo
+tapar,cubrir
+tedio,aburrimiento desgano
+tenso,tieso rígido
+trotar,correr
+universal,mundial general internacional
+usurpar,apropiar
+verificar,probar confirmar
+vulgar,ordinario corriente
+yugo,carga opresión atadura
+zapato,bota calzado
+zurrar,apalear aporrear azotar

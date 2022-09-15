@@ -4,8 +4,6 @@
 
 > Proyecto de Programación I. Facultad de Matemática y Computación. Universidad de La Habana. Curso 2021.
 
-
-
 Moogle! es una aplicación *totalmente original* cuyo propósito es buscar inteligentemente un texto en un conjunto de documentos.
 
 Es una aplicación web, desarrollada con tecnología .NET Core 6.0, específicamente usando Blazor como *framework* web para la interfaz gráfica, y en el lenguaje C#.
@@ -15,7 +13,6 @@ La aplicación está dividida en dos componentes fundamentales:
 - `MoogleEngine` es una biblioteca de clases donde está... ehem... casi implementada la lógica del algoritmo de búsqueda.
 
 Hasta el momento hemos logrado implementar gran parte de la interfaz gráfica (que es lo fácil), pero nos está causando graves problemas la lógica. Aquí es donde entras tú.
-
 
 ## Ejecutando el proyecto
 
@@ -32,6 +29,3 @@ dotnet watch run --project MoogleServer
 ```
 
 En la carpeta ./Content debes poner los .txt que vas a utilizar como base de datos, cada vez que haces un cambio en la carpeta ./Content el Moogle lo determinará y ejecutará el stemmer  (es lento <5 min>), ya la segunda vez no se ejecutará porque usará cache y será rápido.
-
-
-

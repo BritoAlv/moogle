@@ -30,10 +30,6 @@ public static class idk{
         {
             result.Add(item.val);
         }
-        foreach (var item in result)
-        {
-            Console.WriteLine(item);
-        }
         return result;
     }
 

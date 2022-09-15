@@ -48,6 +48,10 @@ public partial class query
             {
                 medallas[i][0] = 2;
             }
+            else if (score_by_tfidf[i] > 0)
+            {
+                medallas[i][0] = 0.01;
+            }
 
             /////////////////////////////
             // ranking by cercania.

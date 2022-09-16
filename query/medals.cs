@@ -37,12 +37,12 @@ public partial class query
             /////////////////////////////
             if (score_by_tfidf[i] > 0.85)
             {
-                medallas[i][0] = 4;
+                medallas[i][0] = 5;
                 
             }
             else if (score_by_tfidf[i] > 0.7)
             {
-                medallas[i][0] = 3;
+                medallas[i][0] = 4;
             }
             else if (score_by_tfidf[i] > 0.3)
             {
@@ -86,11 +86,11 @@ public partial class query
 
             if ( (score_by_min_interval[i] >= min_interval_max_words) &&  ( ( score_by_cercania[i]- min_interval_max_words) > 0.001)  && score_by_min_interval[i] > 0.6*this.words_to_request.Count )
             {
-                medallas[i][2] = 6 + (score_by_min_interval[i]- Math.Floor(score_by_min_interval[i]));
+                medallas[i][2] = 4 + (score_by_min_interval[i]- Math.Floor(score_by_min_interval[i]));
             }
             else if (score_by_min_interval[i] >= min_interval_max_words && score_by_min_interval[i] > 0.65*this.words_to_request.Count )
             {
-                medallas[i][2] = 4 + (score_by_min_interval[i]- Math.Floor(score_by_min_interval[i]));
+                medallas[i][2] = 3 + (score_by_min_interval[i]- Math.Floor(score_by_min_interval[i]));
             }
             else if (score_by_min_interval[i] >= min_interval_max_words)
             {

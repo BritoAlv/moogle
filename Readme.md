@@ -7,16 +7,10 @@
 Moogle! es una aplicación *totalmente original* cuyo propósito es buscar inteligentemente un texto en un conjunto de documentos.
 
 Es una aplicación web, desarrollada con tecnología .NET Core 6.0, específicamente usando Blazor como *framework* web para la interfaz gráfica, y en el lenguaje C#.
-La aplicación está dividida en dos componentes fundamentales:
 
-- `MoogleServer` es un servidor web que renderiza la interfaz gráfica y sirve los resultados.
-- `MoogleEngine` es una biblioteca de clases donde está... ehem... casi implementada la lógica del algoritmo de búsqueda.
+## Requisitos y como ejecutarlo:
 
-Hasta el momento hemos logrado implementar gran parte de la interfaz gráfica (que es lo fácil), pero nos está causando graves problemas la lógica. Aquí es donde entras tú.
-
-## Ejecutando el proyecto
-
-Lo primero que tendrás que hacer para poder trabajar en este proyecto es instalar .NET Core 6.0 (lo que a esta altura imaginamos que no sea un problema, ¿verdad?). Luego, solo te debes parar en la carpeta del proyecto y ejecutar en la terminal de Linux:
+Necesitas tener instalado algún navegador y tener disponible a dotnet en tu path, o equivalente a esto tener NET CORE 6.0 instalado, para ejecutarlo te debes parar en la carpeta del proyecto y ejecutar en la terminal de Linux:
 
 ```bash
 make dev
@@ -28,4 +22,26 @@ Si estás en Windows, debes poder hacer lo mismo desde la terminal del WSL (Wind
 dotnet watch run --project MoogleServer
 ```
 
-En la carpeta ./Content debes poner los .txt que vas a utilizar como base de datos, cada vez que haces un cambio en la carpeta ./Content el Moogle lo determinará y ejecutará el stemmer  (es lento <5 min>), ya la segunda vez no se ejecutará porque usará cache y será rápido.
+En la carpeta (raíz del proyecto)/Content  o (./Content) debes poner los .txt que vas a utilizar como base de datos, cada vez que haces un cambio en la carpeta ./Content el Moogle lo determinará y ejecutará el stemmer (lo que le halla la raíz a las palabras basado en probabilidad)  (es lento <5 min>, so no te preocupes porque se demore cargando), por suerte esto ocurre la primera vez que se carga el Moogle con la nuvea base de datos, después no se ejecutará porque usará cache y será rápido.
+
+## Instrucciones para usarlo:
+
+- cuando vayas escribiendo una palabra en la barra de búsqueda aparecerá en el fondo una sugerencia, si aprietas la flecha arriba del teclado se autocompleta la palabra.
+
+- si añades ^ delante de una palabra está palabra aparecerá en todos los documentos  resultantes, mientras que si añades ! delante de una palabra está no puede aparecer en ningún documento resultante.
+
+- si por alguna razón deseas añadirle más prioridad a alguna palabra de tu búsqueda puedes añadirle signos * al comienzo, mientras más, más prioridad.
+
+- si necesitas buscar alguna frase textualmente,puedes poner el símbolo ~ entre dos o más palabras, esto hará que mientras más cercanas estén más relevante será el resultado.
+
+- finalmente si tienes  verbo y no estás seguro de que conjugación buscar, o que pueda aparecer un sinónimo de la palabra puedes añadir ¿ delante de la palabra, esto buscará sinónimos de esta palabra y palabras con su misma raíz, por ejemplo: vaciló vacilante etc.
+
+- palabras muy comunes en los documentos serán ignoradas como lo, el, etc, si deseas buscar por ella considera relacionarlas con el operador de ~ (no serán desechadas).
+
+## Ejemplos de query:
+
+1. **esencial~invisible~ojos
+
+2. *¿*esencial~invisible ojos principito~dijo
+
+3. 

@@ -19,7 +19,7 @@ public partial class query
                 tfidf_score = tfidf_score + this.tfidf[word]*x.request_word_weight(word, doc_index, similar_words.Contains(word));
                 cont++;
             }
-            tfidf_score = ( tfidf_score / x.the_docs[doc_index].norm) / this.norm;
+            tfidf_score = (tfidf_score) / (x.the_docs[doc_index].norm * this.norm);
             this.score_by_tfidf[doc_index] = tfidf_score;
 
             //////////////////////////////////////////////////////////////////////////////////////////////////

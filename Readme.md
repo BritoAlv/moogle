@@ -36,7 +36,7 @@ En la carpeta (raíz del proyecto)/Content  o (./Content) debes poner los .txt q
 
 - finalmente si tienes  verbo y no estás seguro de que conjugación buscar, o que pueda aparecer un sinónimo de la palabra puedes añadir ¿ delante de la palabra, esto buscará sinónimos de esta palabra y palabras con su misma raíz, por ejemplo: vaciló vacilante etc.
 
-- palabras muy comunes en los documentos serán ignoradas como lo, el, etc, si deseas forzozamente buscar por ella o es el caso de que para tu base de datos la palabra que buscas  considera insertarle ~ al comienzo de la palabra, esto garantizará que no sean ignoradas debido a ser comunes.
+- palabras muy comunes en los documentos serán ignoradas como lo, el, etc, si deseas forzozamente buscar por ella o es el caso de que para tu base de datos la palabra que buscas resulta ser ignorada  considera insertarle ~ al comienzo de la palabra, esto garantizará que no sea ignorada debido a ser muy común.
 
 ## Ejemplos de query:
 

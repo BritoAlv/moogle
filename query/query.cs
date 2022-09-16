@@ -149,7 +149,6 @@ public partial class query
     ////////////////////////////////////////////////////////////////////////////// 
     // set tf-idf to each word in the query.
     // compute norm of the query.
-    // ignore words that are in 95% of documents if there are more than 20 docs and not in ~.
     // select the words that we are going to request/ take in account. These are the ones that doesn't
     // belong to the forbidden ones and the common ones, also this ensure that the words of op_cerc are 
     // a subset of request_words.
@@ -168,7 +167,12 @@ public partial class query
             double idf_word = x.request_word_idf(item.Key, similar_words.Contains(item.Key));
             tfidf[item.Key] = (tfidf[item.Key] / len ) * (x.cant_docs) / (double)(idf_word+1) ;
             norm = norm + (tfidf[item.Key])*(tfidf[item.Key]);
-            if ( (idf_word >= 0.93*x.cant_docs) && (x.cant_docs > 200) && !(closest_words.Contains(item.Key)))
+            // ignore words that are in the 98% of the docs if there are more than 20 docs.
+            /*
+            this introduce the problem that if our database is about harry potter books, the word harry will be ignored always,
+            when doing a normal search without ^~. 
+            */
+            if ( (idf_word >= 0.98*x.cant_docs) && (x.cant_docs > 20) && !(closest_words.Contains(item.Key)))
                 {
                     if(!only_words.Contains(item.Key) && !(boosted_words.ContainsKey(item.Key)))
                     {
@@ -192,7 +196,7 @@ public partial class query
     //////////////////////////////////////////////////////////////////////////////
     foreach (var item in boosted_words)
     {
-        tfidf[item.Key] = Math.Pow(2, boosted_words[item.Key]+1)*tfidf[item.Key];
+        tfidf[item.Key] = Math.Pow(10, boosted_words[item.Key]+1)*tfidf[item.Key];
     }
 
     ////////////////////////////////////////////////////////////////////////////// 

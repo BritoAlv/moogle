@@ -28,7 +28,7 @@ En la carpeta (raíz del proyecto)/Content  o (./Content) debes poner los .txt q
 
 - cuando vayas escribiendo una palabra en la barra de búsqueda aparecerá en el fondo una sugerencia, si aprietas la flecha arriba del teclado se autocompleta la palabra.
 
-- si añades ^ delante de una palabra está palabra aparecerá en todos los documentos  resultantes, mientras que si añades ! delante de una palabra está no puede aparecer en ningún documento resultante.
+- si añades ^ delante de una palabra está palabra ha de aparecer en todos los documentos  resultantes, mientras que si añades ! delante de una palabra está no puede aparecer en ningún documento resultante.
 
 - si por alguna razón deseas añadirle más prioridad a alguna palabra de tu búsqueda puedes añadirle signos * al comienzo, mientras más, más prioridad.
 
@@ -36,7 +36,7 @@ En la carpeta (raíz del proyecto)/Content  o (./Content) debes poner los .txt q
 
 - finalmente si tienes  verbo y no estás seguro de que conjugación buscar, o que pueda aparecer un sinónimo de la palabra puedes añadir ¿ delante de la palabra, esto buscará sinónimos de esta palabra y palabras con su misma raíz, por ejemplo: vaciló vacilante etc.
 
-- palabras muy comunes en los documentos serán ignoradas como lo, el, etc, si deseas buscar por ella considera relacionarlas con el operador de ~ (no serán desechadas).
+- palabras muy comunes en los documentos serán ignoradas como lo, el, etc, si deseas forzozamente buscar por ella o es el caso de que para tu base de datos la palabra que buscas  considera insertarle ~ al comienzo de la palabra, esto garantizará que no sean ignoradas debido a ser comunes.
 
 ## Ejemplos de query:
 
@@ -44,4 +44,4 @@ En la carpeta (raíz del proyecto)/Content  o (./Content) debes poner los .txt q
 
 2. *¿*esencial~invisible ojos principito~dijo
 
-3. 
+3. ~ojos

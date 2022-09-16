@@ -168,9 +168,9 @@ public partial class query
             double idf_word = x.request_word_idf(item.Key, similar_words.Contains(item.Key));
             tfidf[item.Key] = (tfidf[item.Key] / len ) * (x.cant_docs) / (double)(idf_word+1) ;
             norm = norm + (tfidf[item.Key])*(tfidf[item.Key]);
-            if (idf_word >= (0.93)*x.cant_docs && (x.cant_docs > 20) && !(closest_words.Contains(item.Key)))
+            if ( (idf_word >= 0.93*x.cant_docs) && (x.cant_docs > 200) && !(closest_words.Contains(item.Key)))
                 {
-                    if(!only_words.Contains(item.Key))
+                    if(!only_words.Contains(item.Key) && !(boosted_words.ContainsKey(item.Key)))
                     {
                         common_words.Add(item.Key);
                     }
@@ -190,11 +190,9 @@ public partial class query
     ////////////////////////////////////////////////////////////////////////////// 
     // stuff of ****
     //////////////////////////////////////////////////////////////////////////////
-
-    double max = (tfidf.Count>0)?tfidf.Values.Max():0;
     foreach (var item in boosted_words)
     {
-        tfidf[item.Key] = max*item.Value;
+        tfidf[item.Key] = Math.Pow(2, boosted_words[item.Key]+1)*tfidf[item.Key];
     }
 
     ////////////////////////////////////////////////////////////////////////////// 
@@ -261,7 +259,7 @@ public partial class query
 
 
     ////////////////////////////////////////////////////////////////////////////////
-    // Select best results based on medals, the medals in the category  min interval 
+    // Select best results based on medals, the medals in the category op cercania 
     // are the better ones. 
     /////////////////////////////////////////////////////////////////////////////////
     best_docs = get_medals();

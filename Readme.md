@@ -40,8 +40,8 @@ En la carpeta (raíz del proyecto)/Content  o (./Content) debes poner los .txt q
 
 ## Ejemplos de query:
 
-1. **esencial~invisible~ojos
+1. **esencial\~invisible\~ojos
 
-2. *¿*esencial~invisible ojos principito~dijo
+2. *¿*esencial\~invisible ojos principito\~dijo
 
 3. ~ojos

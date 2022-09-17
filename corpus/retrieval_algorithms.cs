@@ -5,6 +5,24 @@ using d_t_h;
 
 public partial class corpus
 {
+    public bool word_is_popular(string word)
+    {
+        // decide if the world is popular in the docs. this function is expected to return true. design to ignore stopwords.
+        int c = 4*this.cant_docs/5;
+        int total = 0;
+        foreach (var doc in  this.bd[word].docs)
+        {
+            if (doc.Value.pos.Count > 100)
+            {
+                total++;
+                if(total > c)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
     public double request_word_idf(string word, bool allow_similar)
     {
         if (allow_similar)

@@ -172,15 +172,11 @@ public partial class query
             this introduce the problem that if our database is about harry potter books, the word harry will be ignored always,
             when doing a normal search without ^~. 
             */
-            if ( (idf_word >= 0.98*x.cant_docs) && (x.cant_docs > 20) && !(closest_words.Contains(item.Key)))
-                {
-                    if(!only_words.Contains(item.Key) && !(boosted_words.ContainsKey(item.Key)))
-                    {
-                        common_words.Add(item.Key);
-                    }
-                }
-        }
-
+            if ( !(only_words.Contains(item.Key)) && !(boosted_words.ContainsKey(item.Key)) && (idf_word >= 0.90*x.cant_docs) && !(closest_words.Contains(item.Key)) && (x.word_is_popular(item.Key)))
+            {
+                    common_words.Add(item.Key);
+            }
+        }    
         if (!(common_words.Contains(item.Key)) && !(forbidden_words.Contains(item.Key)))
         {
             words_to_request.Add(item.Key);

@@ -8,7 +8,7 @@ public partial class token
 {
     public List<string> hashes_on_txt; // load the hashes in disk.
     public List<string> new_hashes; // new hashes
-    public List<string> old_hashes;
+    public List<string> old_hashes; // the hashes that are in the disk
 
     public token()
     {
@@ -71,7 +71,7 @@ public void process(string doc_name,string text, int id, Dictionary<string, info
         }
 
         ///////////////////////////////////////////////////////////////////
-        // START LOOPING THE QUERY.
+        // START LOOPING THE TEXT.
         ///////////////////////////////////////////////////////////////////
 
         for (int i = 0; i < text.Length; i++)

@@ -1,7 +1,7 @@
 public static class stemmer
 {
     public static string[] spanish_endings = 
-    {"ba","bas","ron","ste","mos","ndo","o", "a", "r", "as", "n", "ras", "ria", "me","los", "ia","nos", "i","es","rlos","rlas","ste", "do", "s", "ndolo", "ndo", "ndola", "ndome","ndonos", "ndolos","an", "ran", "ra", "rte","le", "te", "da", "dos", "la", "se", "d", "nlo", "rle","rnos", "rse"};
+    {"ba","bas","ron","ste","mos","ática","ático","ndo","o", "a", "r", "as", "n", "ras", "ria", "me","los", "ia","nos", "i","es","rlos","rlas","ste", "do", "s", "ndolo", "ndo", "ndola", "ndome","ndonos", "ndolos","an", "ran", "ra", "rte","le", "te", "da", "dos", "la", "se", "d", "nlo", "rle","rnos", "rse"};
     public static char[] vocals = {'a','e','i','o','u','á','é','í','ó','ú'};
     /* 
     the stemmer will take the dictionary with all words in the document and will try put words with same family. How this will work, this will take an array of words, and will return a dict where key is the word and value is the word a la cual fue linked.

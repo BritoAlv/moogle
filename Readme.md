@@ -26,6 +26,8 @@ En la carpeta (raíz del proyecto)/Content  o (./Content) debes poner los .txt q
 
 ## Instrucciones para usarlo:
 
+- cada documento es juzgado en tres categorías: tf-idf, operador de cercanía, menor intervalo donde aparecen las palabras de la query, de ahí las medallas.
+
 - el botón de sugerencias indica con un número la cantidad de palabras en la query que no se encuentran en el corpus, al presionarlo, tratará de buscar alguna palabra en el corpus que se asemeje lo más posible a la palabra de la query, la reemplazará y ejecutará una nueva búsqueda.
 
 - cuando vayas escribiendo una palabra en la barra de búsqueda aparecerá en el fondo una sugerencia, si aprietas la flecha arriba del teclado se autocompleta la palabra.
@@ -47,3 +49,9 @@ En la carpeta (raíz del proyecto)/Content  o (./Content) debes poner los .txt q
 2. *¿*esencial\~invisible ojos principito\~dijo
 
 3. ~ojos
+
+## Ideas Para Añadirle:
+
+- debido a que el stemmer se toma su tiempo enseñar en consola el porciento por el que va este proceso.
+
+- poner en un archivo .json todas las constantes que hay en el proyecto para que el usuario pueda modificarlas a su conveniencia.

@@ -26,6 +26,8 @@ En la carpeta (raíz del proyecto)/Content  o (./Content) debes poner los .txt q
 
 ## Instrucciones para usarlo:
 
+- el botón de sugerencias indica con un número la cantidad de palabras en la query que no se encuentran en el corpus, al presionarlo, tratará de buscar alguna palabra en el corpus que se asemeje lo más posible a la palabra de la query, la reemplazará y ejecutará una nueva búsqueda.
+
 - cuando vayas escribiendo una palabra en la barra de búsqueda aparecerá en el fondo una sugerencia, si aprietas la flecha arriba del teclado se autocompleta la palabra.
 
 - si añades ^ delante de una palabra está palabra ha de aparecer en todos los documentos  resultantes, mientras que si añades ! delante de una palabra está no puede aparecer en ningún documento resultante.

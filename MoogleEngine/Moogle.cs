@@ -35,18 +35,26 @@ public class Moogle
         string new_word = old_word;
         if (old_word.Length > 2)
         {
-            int start = x.index[old_word.Length - 2];
-            int end = x.index[old_word.Length + 3];
-            for (int i = start; i < end; i++)
+            void process(int start, int end)
             {
-                int d = string_algs.Levensthein(old_word, x.words[i]);
-                //Console.WriteLine("Levenstein de " +word + " y " + b.wordds[i] + " es " + d);
-                if (d < edit_distance)
+                for (int i = start; i < end; i++)
                 {
-                    edit_distance = d;
-                    new_word = x.words[i];
+                    int d = string_algs.Levensthein(old_word, x.words[i]);
+                    //Console.WriteLine("Levenstein de " +word + " y " + b.wordds[i] + " es " + d);
+                    if (d < edit_distance)
+                    {
+                        edit_distance = d;
+                        new_word = x.words[i];
+                    }
                 }
             }
+            for (int i = 1; i < 3; i++) 
+            {
+                process(x.index[old_word.Length-i], x.index[old_word.Length-i+1]);
+                process(x.index[old_word.Length+i], x.index[old_word.Length+i+1]);
+            }
+            process(x.index[old_word.Length], x.index[old_word.Length+1]);
+            new_word = new_word.ToLower();
             // replace in old_query all ocurrences if there are any of the old_word by the new word.
             /* when the search button is pressed a list of suggestions words will be created, the number of words is
             indicated by the number_of_suggestions, if the suggestion button is touched, we try to replace the suggest word

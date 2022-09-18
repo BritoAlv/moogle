@@ -14,7 +14,7 @@ public partial class token
         else
         {
             linked = stemmer.stem(A.Keys.ToArray());
-            string jsonString1 = JsonSerializer.Serialize(linked);
+            string jsonString1 = JsonSerializer.Serialize(linked, new JsonSerializerOptions{WriteIndented = true});
             File.WriteAllText("../cache/similar_words.json", jsonString1);
         }
 

@@ -10,7 +10,7 @@ Es una aplicación web, desarrollada con tecnología .NET Core 6.0, específicam
 
 ## Requisitos y como ejecutarlo:
 
-Necesitas tener instalado algún navegador y tener disponible a dotnet en tu path, o equivalente a esto tener NET CORE 6.0 instalado, para ejecutarlo te debes parar en la carpeta del proyecto y ejecutar en la terminal de Linux:
+Necesitas tener instalado algún navegador y tener disponible a dotnet en tu path, o equivalente a esto tener NET CORE 6.0 instalado, para ejecutarlo te debes ubicar en la carpeta del proyecto y ejecutar en la terminal de Linux:
 
 ```bash
 make dev
@@ -25,6 +25,8 @@ dotnet watch run --project MoogleServer
 En la carpeta (raíz del proyecto)/Content  o (./Content) debes poner los .txt que vas a utilizar como base de datos, cada vez que haces un cambio en la carpeta ./Content el Moogle lo determinará y ejecutará el stemmer (lo que le halla la raíz a las palabras basado en probabilidad)  (es lento <5 min>, so no te preocupes porque se demore cargando), por suerte esto ocurre la primera vez que se carga el Moogle con la nuvea base de datos, después no se ejecutará porque usará cache y será rápido.
 
 ## Instrucciones para usarlo:
+
+- en la carpeta Constants hay un .json que contiene algunas constantes que es posible cambiar para afectar algunos criterios como el valor de las medallas, eres libre de hacer lo que quieras, en caso de que no funcione correctamente, el buscador optará por unos criterios por defecto.
 
 - cada documento es juzgado en tres categorías: tf-idf, operador de cercanía, menor intervalo donde aparecen las palabras de la query, de ahí las medallas.
 

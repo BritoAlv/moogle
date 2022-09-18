@@ -53,5 +53,3 @@ En la carpeta (raíz del proyecto)/Content  o (./Content) debes poner los .txt q
 ## Ideas Para Añadirle:
 
 - debido a que el stemmer se toma su tiempo enseñar en consola el porciento por el que va este proceso.
-
-- poner en un archivo .json todas las constantes que hay en el proyecto para que el usuario pueda modificarlas a su conveniencia.

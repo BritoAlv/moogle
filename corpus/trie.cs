@@ -16,7 +16,6 @@ public class trie_node{
 
 public class trie{
     private trie_node root; // root of the trie, in esence this is all the info of a trie.
-    public Random a;
     /*
     Containers for global variables to store information (this is for store the words found in the search of
     words that start with especific substring) 
@@ -28,7 +27,6 @@ public class trie{
     public trie(){
         root = new trie_node();
         words = new List<string>();
-        a = new Random();
     }
 
     public void insert(string word)
@@ -139,13 +137,23 @@ public class trie{
             words_finder_traversal(node.children[item]);
         }
     }
-    public string search_word(string prefix)
+    public string search_word(string prefix, corpus x)
     {
         if( this.startsWith(prefix))
         {
             trie_node tn = this.search_node(prefix); // search for the node that starts at "prefix"
             this.words_finder_traversal(tn); // find all words at that root, and save them in the global list
-            return this.words[a.Next(0, words.Count)]; // get a random word from that list.
+            string result = this.words[0];
+            int max = x.bd[this.words[0]].idf;
+            foreach (var word in this.words)
+            {
+                if(max < x.bd[word].idf)
+                {
+                    max = x.bd[word].idf;
+                    result = word;
+                }
+            }
+            return result; // get a random word from that list.
         }
         else
         {

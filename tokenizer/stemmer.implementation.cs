@@ -117,7 +117,7 @@ public static class stemmer
     {
         List<string> closest = new List<string>();
         closest.Add(words[index]);
-        for (int i = 1; i < 21; i++)
+        for (int i = 1; i < 18; i++)
         {
             if(index-i >=0)
             {
@@ -152,7 +152,7 @@ public static class stemmer
     
     public static Dictionary<string, string> stem(string[] words)
     {
-
+        Console.WriteLine("Stemmer started its work because there is no cache: ");
         // first step is sort the array
         Array.Sort(words);
         List<string> b = words.ToList();
@@ -164,7 +164,7 @@ public static class stemmer
         {
             if(i < len)
             {
-                if(b[i].EndsWith('l')) // words ended with l are a mess
+                if(b[i].EndsWith('l') || b[i].Length < 3) // words ended with l are a mess
                 {
                     // singular
                     weird_words.Add(b[i]);
@@ -249,6 +249,8 @@ public static class stemmer
                 }        
             }
         }
+        Console.WriteLine();
+        Console.Write("Almost Done ");
         foreach (string word in weird_words)
         {
             b.Add(word);

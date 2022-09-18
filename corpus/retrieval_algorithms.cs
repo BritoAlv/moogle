@@ -1,14 +1,12 @@
 namespace corpuss;
-using docc;
-using tokenizer;
 using d_t_h;
 
 public partial class corpus
 {
-    public bool word_is_popular(string word)
+    public bool word_is_popular(string word, double factor)
     {
         // decide if the world is popular in the docs. this function is expected to return true. design to ignore stopwords.
-        int c = 4*this.cant_docs/5;
+        int c = ((int)(factor*this.cant_docs));
         int total = 0;
         foreach (var doc in  this.bd[word].docs)
         {

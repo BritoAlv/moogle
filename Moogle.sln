@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "data_structure", "data_stru
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "query", "query\query.csproj", "{938B79BC-DDE9-4F9E-8E80-E89DC217C49A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Constants", "Constants\Constants.csproj", "{EE28F0DA-F52B-44D4-BC05-AE034BC825DA}"
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -114,5 +116,17 @@ Global
 		{938B79BC-DDE9-4F9E-8E80-E89DC217C49A}.Release|x64.Build.0 = Release|Any CPU
 		{938B79BC-DDE9-4F9E-8E80-E89DC217C49A}.Release|x86.ActiveCfg = Release|Any CPU
 		{938B79BC-DDE9-4F9E-8E80-E89DC217C49A}.Release|x86.Build.0 = Release|Any CPU
+		{EE28F0DA-F52B-44D4-BC05-AE034BC825DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE28F0DA-F52B-44D4-BC05-AE034BC825DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE28F0DA-F52B-44D4-BC05-AE034BC825DA}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{EE28F0DA-F52B-44D4-BC05-AE034BC825DA}.Debug|x64.Build.0 = Debug|Any CPU
+		{EE28F0DA-F52B-44D4-BC05-AE034BC825DA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EE28F0DA-F52B-44D4-BC05-AE034BC825DA}.Debug|x86.Build.0 = Debug|Any CPU
+		{EE28F0DA-F52B-44D4-BC05-AE034BC825DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE28F0DA-F52B-44D4-BC05-AE034BC825DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE28F0DA-F52B-44D4-BC05-AE034BC825DA}.Release|x64.ActiveCfg = Release|Any CPU
+		{EE28F0DA-F52B-44D4-BC05-AE034BC825DA}.Release|x64.Build.0 = Release|Any CPU
+		{EE28F0DA-F52B-44D4-BC05-AE034BC825DA}.Release|x86.ActiveCfg = Release|Any CPU
+		{EE28F0DA-F52B-44D4-BC05-AE034BC825DA}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -4,9 +4,11 @@ using System.Diagnostics;
 using corpuss;
 using string_algss;
 using qquery;
+using Constants;
 
 public class Moogle
 {
+    public constant cons = new constant();
     public string time = "0s";
     public corpus x = new corpus();
     public query the_query;
@@ -14,7 +16,7 @@ public class Moogle
     {
         Stopwatch a = new Stopwatch();
         a.Start();
-        this.the_query = new query(la_query, this.x);
+        this.the_query = new query(la_query, this.x, cons);
         a.Stop();
         this.time = ((double)(a.ElapsedMilliseconds) / 1000).ToString() + "s";
         List<SearchItem> items = new List<SearchItem>();

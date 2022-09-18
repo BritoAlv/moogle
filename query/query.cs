@@ -4,6 +4,7 @@
 namespace qquery;
 using corpuss;
 using d_t_h;
+using Constants;
 public partial class query
 {
     string q; // the query
@@ -28,7 +29,7 @@ public partial class query
     public Tuple<int, string,string,string>[] best_docs;
     double norm;
 
-    public query(string s, corpus x)
+    public query(string s, corpus x, constant cons)
     {
         ////////////////////////////////////////////////////////////////////////////// 
         //save all the relevant info of the query. Why use A HashSet and not something else;
@@ -172,7 +173,7 @@ public partial class query
             this introduce the problem that if our database is about harry potter books, the word harry will be ignored always,
             when doing a normal search without ^~. 
             */
-            if ( !(only_words.Contains(item.Key)) && !(boosted_words.ContainsKey(item.Key)) && (idf_word >= 0.90*x.cant_docs) && !(closest_words.Contains(item.Key)) && (x.word_is_popular(item.Key)))
+            if ( !(only_words.Contains(item.Key)) && !(boosted_words.ContainsKey(item.Key)) && (idf_word >= (cons.constants["idf_factor"])*x.cant_docs) && !(closest_words.Contains(item.Key)) && (x.word_is_popular(item.Key, cons.constants["popular_factor"])))
             {
                     common_words.Add(item.Key);
             }
@@ -262,7 +263,7 @@ public partial class query
     // Select best results based on medals, the medals in the category op cercania 
     // are the better ones. 
     /////////////////////////////////////////////////////////////////////////////////
-    best_docs = get_medals();
+    best_docs = get_medals(cons);
     
    
     // first ten elements in the medallas array son nuestro resultados.

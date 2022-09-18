@@ -2,10 +2,11 @@
 
 */
 namespace qquery;
+using Constants;
 public partial class query
 {
 
-    public Tuple<int, string, string, string>[] get_medals()
+    public Tuple<int, string, string, string>[] get_medals( constant cons )
     {
         // we determine medals in the tf-idf category by comparing to the best result.
         // we determine medals in the op_cerc by comparing the items and also with respect
@@ -37,16 +38,16 @@ public partial class query
             /////////////////////////////
             if (score_by_tfidf[i] > 0.85)
             {
-                medallas[i][0] = 5;
+                medallas[i][0] = cons.constants["medalla_oro_tf_idf"];
                 
             }
             else if (score_by_tfidf[i] > 0.7)
             {
-                medallas[i][0] = 4;
+                medallas[i][0] = cons.constants["medalla_plata_tf_idf"];
             }
             else if (score_by_tfidf[i] > 0.3)
             {
-                medallas[i][0] = 2;
+                medallas[i][0] = cons.constants["medalla_bronce_tf_idf"];
             }
             else if (score_by_tfidf[i] > 0)
             {
@@ -64,15 +65,15 @@ public partial class query
 
             if ((score_by_cercania[i] >= cercania_max_words) && score_by_cercania[i] >= 0.67*this.closest_words.Count )
             {
-                medallas[i][1] = 6 + (score_by_cercania[i]- Math.Floor(score_by_cercania[i]));
+                medallas[i][1] = cons.constants["medalla_oro_cercania"] + (score_by_cercania[i]- Math.Floor(score_by_cercania[i]));
             }
             else if (score_by_cercania[i] >= 0.6*cercania_max_words && score_by_cercania[i] >= 0.6*this.closest_words.Count)
             {
-                medallas[i][1] = 4 + (score_by_cercania[i]- Math.Floor(score_by_cercania[i]));
+                medallas[i][1] = cons.constants["medalla_plata_cercania"]  + (score_by_cercania[i]- Math.Floor(score_by_cercania[i]));
             }
             else if (score_by_cercania[i] >= 0.5*cercania_max_words)
             {
-                medallas[i][1] = 2+ (score_by_cercania[i]- Math.Floor(score_by_cercania[i]));
+                medallas[i][1] = cons.constants["medalla_bronce_cercania"] + (score_by_cercania[i]- Math.Floor(score_by_cercania[i]));
             }                        
 
             /////////////////////////////
@@ -86,15 +87,15 @@ public partial class query
 
             if ( (score_by_min_interval[i] >= min_interval_max_words) &&  ( ( score_by_cercania[i]- min_interval_max_words) > 0.001)  && score_by_min_interval[i] > 0.6*this.words_to_request.Count )
             {
-                medallas[i][2] = 4 + (score_by_min_interval[i]- Math.Floor(score_by_min_interval[i]));
+                medallas[i][2] = cons.constants["medalla_oro_min_interval"] + (score_by_min_interval[i]- Math.Floor(score_by_min_interval[i]));
             }
             else if (score_by_min_interval[i] >= min_interval_max_words && score_by_min_interval[i] > 0.65*this.words_to_request.Count )
             {
-                medallas[i][2] = 3 + (score_by_min_interval[i]- Math.Floor(score_by_min_interval[i]));
+                medallas[i][2] = cons.constants["medalla_plata_min_interval"] + (score_by_min_interval[i]- Math.Floor(score_by_min_interval[i]));
             }
             else if (score_by_min_interval[i] >= min_interval_max_words)
             {
-                medallas[i][2] = 2+ (score_by_min_interval[i] - Math.Floor(score_by_min_interval[i]));
+                medallas[i][2] = cons.constants["medalla_bronce_min_interval"] + (score_by_min_interval[i] - Math.Floor(score_by_min_interval[i]));
             }
 
             sum_of_scores[i] = new Tuple<int, double> (i, medallas[i][0]+ medallas[i][1]+medallas[i][2]);

@@ -1,0 +1,11 @@
+{
+  "medalla_bronce_tf_idf": 2,
+  "medalla_bronce_cercania": 2,
+  "medalla_bronce_min_interval": 2,
+  "medalla_plata_tf_idf": 4,
+  "medalla_plata_cercania": 4,
+  "medalla_plata_min_interval": 3,
+  "medalla_oro_tf_idf": 10,
+  "medalla_oro_cercania": 6,
+  "medalla_oro_min_interval": 4
+}

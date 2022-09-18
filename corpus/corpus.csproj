@@ -10,6 +10,7 @@
     <ProjectReference Include="..\tokenizer\tokenizer.csproj" />
     <ProjectReference Include="..\doc\doc.csproj" />
     <ProjectReference Include="..\data_structure\data_structure.csproj" />
+    <ProjectReference Include="..\Constants\Constants.csproj" />
   </ItemGroup>
 
 </Project>

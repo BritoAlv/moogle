@@ -2,10 +2,11 @@
 */
 namespace qquery;
 using corpuss;
+using Constants;
 using d_t_h;
 public partial class query
 {
-    public void by_min_in(int doc_index)
+    public void by_min_in(int doc_index, constant cons)
     {
         /*
         now apply the algorithm to result to get the score of this document based on min interval, 
@@ -20,7 +21,7 @@ public partial class query
         else
         {   
             // start of this else clausula.
-            double score_by_min_in = (double)2000;
+            double score_by_min_in = (double)cons.constants["min_interval_length_to_be_considered_as_good"]; // if a resulting interval has length more than this will be used this value as the length of the interval
             int start_min = result[0].val;
             int end_min = result[result.Count-1].val;
             Dictionary<int, int> count = new Dictionary<int, int>();
@@ -65,7 +66,7 @@ public partial class query
                 }
                 this.score_by_min_interval[doc_index] = cc + ((double)2) / (double)( score_by_min_in);
                 // snippet work.
-                if (score_by_min_in < 300) // if the interval is small enough keep it to the snippet
+                if (score_by_min_in < cons.constants["min_interval_length_to_snippet"]) // if the interval is small enough keep it to the snippet
                 {
                     this.the_snippets[doc_index].add_(new Tuple<int, int>(start_min, end_min), count.Keys.ToList());
                 }

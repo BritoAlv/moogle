@@ -1,19 +1,22 @@
 using corpuss;
+using Constants;
 using qquery;
 using System.Text.RegularExpressions;
 public class snippet
 {
+    public int extra_length;
     public Dictionary<int,  bool> already_words; // id vs words is in the snippet
     public List<Tuple<int, int>> positions; // each tuple represent a diferent portion of snippet
     public int index_document; // the index of the document
     public Dictionary<int, int> respuesto;
 
-    public snippet(int a)
+    public snippet(int a, constant cons)
     {
         this.index_document = a;
         this.already_words = new Dictionary<int, bool>();
         this.positions = new List<Tuple<int, int>>();
         this.respuesto = new Dictionary<int, int>();
+        this.extra_length = ((int)cons.constants["extra_length_snippet"]);
     }
 
     public void add_(Tuple<int, int> A, List<int> ids)
@@ -31,13 +34,13 @@ public class snippet
 
         string pedazo_texto(Tuple<int, int> A)
         {
-            int start = A.Item1-100;
+            int start = A.Item1-extra_length;
             while (start >= 0 && char.IsLetterOrDigit(x.the_docs[this.index_document].text[start]))
             {
                 start--;
             }
             start = Math.Max(0, start);
-            int end = A.Item2+100;
+            int end = A.Item2+extra_length;
             while (end <= x.the_docs[this.index_document].text.Length-1 && char.IsLetterOrDigit(x.the_docs[this.index_document].text[end]))
             {
                 end++;

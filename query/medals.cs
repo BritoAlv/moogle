@@ -109,15 +109,15 @@ public partial class query
         {
             // get medals of sum_of_scores[i].Item1;
             string[] r = new string[3];
-            if (medallas[sum_of_scores[i].Item1][0] >=4)
+            if (medallas[sum_of_scores[i].Item1][0] >= cons.constants["medalla_oro_tf_idf"])
             {
                 r[0] = "🥇";
             }
-            else if (medallas[sum_of_scores[i].Item1][0] >=3)
+            else if (medallas[sum_of_scores[i].Item1][0] >= cons.constants["medalla_plata_tf_idf"])
             {
                 r[0] = "🥈";
             }
-            else if (medallas[sum_of_scores[i].Item1][0] >=2)
+            else if (medallas[sum_of_scores[i].Item1][0] >= cons.constants["medalla_bronce_tf_idf"])
             {
                 r[0] = "🥉";
             }
@@ -127,15 +127,15 @@ public partial class query
             }
 
 
-            if (medallas[sum_of_scores[i].Item1][1] >=6)
+            if (medallas[sum_of_scores[i].Item1][1] >=cons.constants["medalla_oro_cercania"])
             {
                 r[1] = "🥇";
             }
-            else if (medallas[sum_of_scores[i].Item1][1] >=4)
+            else if (medallas[sum_of_scores[i].Item1][1] >= cons.constants["medalla_plata_cercania"])
             {
                 r[1] = "🥈";
             }
-            else if (medallas[sum_of_scores[i].Item1][1] >=2)
+            else if (medallas[sum_of_scores[i].Item1][1] >= cons.constants["medalla_bronce_cercania"])
             {
                 r[1] = "🥉";
             }
@@ -144,15 +144,15 @@ public partial class query
                 r[1] = "X";
             }
 
-            if (medallas[sum_of_scores[i].Item1][2] >=6)
+            if (medallas[sum_of_scores[i].Item1][2] >= cons.constants["medalla_oro_min_interval"])
             {
                 r[2] = "🥇";
             }
-            else if (medallas[sum_of_scores[i].Item1][2] >=4)
+            else if (medallas[sum_of_scores[i].Item1][2] >= cons.constants["medalla_plata_min_interval"])
             {
                 r[2] = "🥈";
             }
-            else if (medallas[sum_of_scores[i].Item1][2] >=2)
+            else if (medallas[sum_of_scores[i].Item1][2] >= cons.constants["medalla_bronce_min_interval"])
             {
                 r[2] = "🥉";
             }

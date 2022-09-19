@@ -204,7 +204,7 @@ public partial class query
     // we loop through the docs to and stay with the ones that doens't contain forbidden words and contain only words.
     for (int i = 0; i <x.cant_docs; i++)
     {   
-        the_snippets[i] = new snippet(i);
+        the_snippets[i] = new snippet(i, cons);
         medallas[i] = new double[3];
         bool d = true;
         /*
@@ -251,7 +251,7 @@ public partial class query
     this.relevant_info = new Dictionary<int, List<id_element<int>>>();
 
 
-    scorers(x, index_of_docs_to_consider);
+    scorers(x, index_of_docs_to_consider, cons);
 
     ////////////////////////////////////////////////////////////////////////////// 
     // At this point we have sorted score based on three components now decide what

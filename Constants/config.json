@@ -9,5 +9,9 @@
   "medalla_oro_cercania": 6,
   "medalla_oro_min_interval": 4,
   "idf_factor": 0.9,
-  "popular_factor": 0.8
+  "popular_factor": 0.8,
+  "min_interval_length_to_be_considered_as_good": 2000,
+  "min_interval_length_to_snippet": 300,
+  "diameter_cercania": 500,
+  "extra_length_snippet": 100
 }

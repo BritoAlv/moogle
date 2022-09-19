@@ -1,8 +1,9 @@
 namespace qquery;
 using d_t_h;
+using Constants;
 public partial class query
 {
-    public void by_cercania(int doc_index)
+    public void by_cercania(int doc_index, constant cons)
     {
         /////////////////////////////////////////////////////////////////////////////////
         /*
@@ -12,7 +13,7 @@ public partial class query
         ////////////////////////////////////////////////////////////////////////////////
         List<double> mini_results = new List<double>(); // store length of each minimal interval.
         double sum_over_each_operator = 0;
-        int fixed_length = 500;
+        int fixed_length = ((int)cons.constants["diameter_cercania"]);
         foreach (var close_words in this.op_cerc) // close_words array of words 
         {
             // get a score for each set of words related by ~

@@ -51,7 +51,7 @@ public partial class query
             }
             else if (score_by_tfidf[i] > 0)
             {
-                medallas[i][0] = 0.01;
+                medallas[i][0] = score_by_tfidf[i];
             }
 
             /////////////////////////////

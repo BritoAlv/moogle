@@ -56,7 +56,7 @@ Este objeto guarda la cantidad de documentos en los que aparece la palabra, la p
 
 El peso asignado a esa palabra y las posiciones en ese documento donde aparece la palabra, como parte de las optimizaciones de el corpus para obtener la información obtenida en él esta lista de posiciones es ordenada de menor a mayor. 
 
-### El proceso de rellenar toda la información en este diccionario es decrito a continuación con cada parte por separado:
+### El proceso de rellenar toda la información en este diccionario es descrito a continuación con cada parte por separado:
 
 #### Cache y Carga De Documentos:
 

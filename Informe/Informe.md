@@ -30,7 +30,7 @@ Este proyecto está dividido en dos grandes partes, el corpus y la query. El cor
 
 - min-window: dado un array con algunos valores, hallar el subintervalo de él de tamaño k que contiene la mayor cantidad de distintos valores de él. Esto es usado en el operador de cercanía, la idea es tener un diccionario que lleve la cuenta de las palabras y sus apariciones , entonces cada vez que recorremos una window(intervalo) actualizamos el diccionario y chequeamos si esta window es más pequeña.
 
-- quick-sort: este es un algoritmo de ordenación bastante rápido que usa recursión. Posee una función llamada particionar que toma un valor de un intervalo del array, lo coloca en la posición correcta en este intervalo y pone a su izquierda los vaores menor que él y a su derecha los valores mayores que él.
+- quick-sort: este es un algoritmo de ordenación bastante rápido que usa recursión. Posee una función llamada particionar que toma un valor de un intervalo del array, lo coloca en la posición correcta en este intervalo y pone a su izquierda los valores menores que él y a su derecha los valores mayores que él.
 
 ## Base de Datos Del Corpus:
 
@@ -69,11 +69,11 @@ Lo primero que se realiza es cargar los documentos en memoria, usando una estruc
     public string path; // the path where it is
 ```
 
-Después de haber obtenido la información anterior se calcula el *SHA256* (un hash) de cada texto de cada documento, en la carpeta cache un "hashes.txt" contiene hashes calculados anteriormente, en base a esta información y los nuevos hashes determino si ha habido algún cambio en la carpeta que contiene los documentos, si un hash ya se encontraba en "hashes.txt" esto significa que este documento ya fue analizado/cacheado, así que busco su información en la carpeta cache, en caso contrario obtengo toda su información, la guardo en la carpeta cache y añado su hash a el archivo "hashes.txt". El hecho de haber algúna diferencia entre los hashes calculados y los existentes en "hashes.txt" me indica que hubo un cambio en la carpeta de la base de datos y por tanto el algoritmo de *stemming* debe ejecutarse.
+Después de haber obtenido la información anterior se calcula el *SHA256* (un hash) de cada texto de cada documento, en la carpeta cache un "hashes.txt" contiene hashes calculados anteriormente, en base a esta información y los nuevos hashes determino si ha habido algún cambio en la carpeta que contiene los documentos, si un hash ya se encontraba en "hashes.txt" esto significa que este documento ya fue analizado/cacheado, así que busco su información en la carpeta cache, en caso contrario obtengo toda su información, la guardo en la carpeta cache y añado su hash a el archivo "hashes.txt". El hecho de haber algúna diferencia entre los hashes calculados y los existentes en "hashes.txt" me indica que hubo un cambio en la carpeta de la base de datos y por tanto el algoritmo de *stemming*  (razón por la cual demora en iniciar el *Moogle* cada vez que analiza una nueva carpeta) debe ejecutarse.
 
 #### Describo el proceso de obtener la información de un documento en caso de que no haya sido cacheado anteriormente:
 
-Se lee el texto del documento carácter por carácter, cada vez que encuentra un intervalo de carácteres que son alfanúmericos (letras o dígitos), intenta añadir la palabra al diccionario grande, general, actualiza su idf y actualiza su peso y guarda en la lista de posiciones la posición donde aparece la palabra. En fin después de hacer este recorrido cada palabra en el documento fue añadida al diccionario general, aumentado en 1 su idf, y en el objeto que contiene la información relevante a esta palabra en el documento se encuentra la cantidad de veces que aparece esta palabra en el documento y una lista con todas las posiciones donde apareció la palabra. Esta información es guardada en dos .json diferentes uno para las posiciones y otro para las palabras.
+Se lee el texto del documento carácter por carácter, cada vez que encuentra un intervalo de carácteres que son alfanúmericos (letras o dígitos), intenta añadir la palabra al diccionario grande, general, actualiza su idf y actualiza su peso y guarda en la lista de posiciones la posición donde aparece la palabra. En fin después de hacer este recorrido cada palabra en el documento fue añadida al diccionario general, aumentado en 1 su idf, y en el objeto que contiene la información relevante a esta palabra en el documento se encuentra la cantidad de veces que aparece esta palabra en el documento y una lista con todas las posiciones donde apareció la palabra. Esta información es guardada en dos .json diferentes uno para las posiciones y otro para las valores de tf-idf.
 
 #### En el punto en el que todos los documentos han sido procesados:
 
@@ -103,7 +103,7 @@ Si es determinado que dos palabras son similares por algún motivo ellas deben t
 
 ![](A.jpg)
 
-Stem es el proceso de hallarle la raíz a una palabra, basado en que las palabras de la misma raíz poseen un comienzo en común y longitud en cierto rango decidí implementar un algoritmo de Stemming, lo más importantes es que este algoritmo toma como argumento un array de strings y devuelve un diccionario donde a cada uno de estos strings le asigno algún string perteneciente a ellos, de esta forma si alguien desea cambiar el stemmer solamente tiene que cambiar la forma en que a cada string le es determinado el string que se le asignará siempre y cuando se cumplan las siguientes condiciones:
+Stem es el proceso de hallarle la raíz a una palabra, basado en que las palabras de la misma raíz poseen un comienzo en común y longitud en cierto rango decidí implementar un algoritmo de Stemming, lo más importante es que este algoritmo toma como argumento un array de strings y devuelve un diccionario donde a cada uno de estos strings le asigno algún string perteneciente a ellos, de esta forma si alguien desea cambiar el stemmer solamente tiene que cambiar la forma en que a cada string le es determinado el string que se le asignará siempre y cuando se cumplan las siguientes condiciones:
 
 - a cada string le es asociado otro string y cada string asociado pertenece a el array tomado.
 
@@ -125,7 +125,7 @@ public double request_word_weight(string word, int id, bool allow_similar = fals
 public List<int> request_word_positions(string word, int id, bool allow_similar = false)
 ```
 
-- decide si una palabra es popular entre los documentos, lo es si aparece màs de 100 (por ejemplo) veces en cierta cantidad de documentos determinada por el factor.
+- decide si una palabra es popular entre los documentos, lo es si aparece más de 100 (por ejemplo) veces en cierta cantidad de documentos determinada por el factor.
 
 - devuelve el idf de la palabra, en caso de que se puedan utilizar las palabras similares a ella devuelve el promedio.
 
@@ -153,7 +153,7 @@ Con el objetivo de determinar los resultados implementé tres funciones para det
 
 #### Modelo Vectorial: TF-IDF
 
-Este score es basado en la implementación de un modelo vectorial: las dimensiones de este son las palabras de la query y el valor es el peso asociado a cada palabra, de esta forma después de solicitar al corpus el tf-idf de cada palabra podemos interpretar  cada documento y la query como un vector, entonces para cada documento calculamos el coseno del ángulo que forma con la query, el coseno de este ángulo es obtenido al dividir el dot product de los dos vectores entre el producto de sus normas. El documento para el cual su coseno es mayor, indica que el ángulo es menor y por tanto es más similar a la query, esta es la idea de este scorer. Debido a que los resultados del tf-idf pueden ser muy cercanos y diferenciarse en 0.0001, decidí dividir todos los resultados obtenidos por el mayor score, de esta forma consideré más apreciable los resultados.
+Este score es basado en la implementación de un modelo vectorial: las dimensiones de este son las palabras de la query y el valor es el peso asociado a cada palabra, de esta forma después de solicitar al corpus el tf-idf de cada palabra podemos interpretar  cada documento y la query como un vector, entonces para cada documento calculamos el coseno del ángulo que forma con la query, el coseno de este ángulo es obtenido al dividir el dot product de los dos vectores entre el producto de sus normas. El documento para el cual su coseno es mayor, indica que el ángulo es menor y por tanto es más similar a la query, esta es la idea de este scorer. Debido a que los resultados del tf-idf pueden ser muy cercanos y diferenciarse en 0.0001, decidí dividir todos los resultados obtenidos por el mayor score. De esta forma consideré más apreciable los resultados.
 
 #### Cercanía:
 
@@ -217,7 +217,7 @@ Creé un objeto de tipo snippet para cada documento, este está compuesto por:
         this.respuesto = new Dictionary<int, int>();
 ```
 
- Para añadir intervalos relevantes uso el siguiente sencillo método *Add*:
+ Para añadir intervalos relevantes uso el siguiente método *Add*:
 
 ```csharp
     public void add_(Tuple<int, int> A, List<int> ids)
@@ -264,7 +264,7 @@ La query es un string que a diferencia de el string de los documentos contiene o
 
 La estructura *HashSet* la usé debido a que los Hashes son eficientes a la hora de hacer métodos como *Contains*
 
-- Para interpretar la query, la leo en busca de palabras, cada vez que encuentro una palabra leo los carácteres delante de ella y añado sus operadores a excepción del     \~ 
+- Para interpretar la query, la leo en busca de palabras, cada vez que encuentro una palabra leo los carácteres a su izquierda de ella y añado sus operadores a excepción del     \~ 
 
 - Después elimino de la query los espacios y los operadores excepto el de cercanía y ahora vuelvo a recorrer la query en busca de las palabras relacionadas por la cercanía.
 
@@ -276,7 +276,7 @@ La estructura *HashSet* la usé debido a que los Hashes son eficientes a la hora
 
 - Desecho las palabras de la query que son populares entre los documentos pero que no son afectadas por los otros operadores, y finalmente me quedo con una lista de palabras que son con las que trabajaré, aquellas que no aparecen en el corpus las dejo en la categoría sugerencias.
 
-- Ahora llamo a la función de asignar scorers, en su ejecución completará el snippet, y finalemente la de las medallas, esto decide los mejores documentos y se lo comunica a Moogle para enseñar la información relevante de estos.
+- Ahora llamo a la función de asignar scorers, en su ejecución completará el snippet, y finalmente la de las medallas, esto decide los mejores documentos y se lo comunica a Moogle para enseñar la información relevante de estos.
 
 ## Constants:
 

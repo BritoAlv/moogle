@@ -20,15 +20,15 @@ Este proyecto está dividido en dos grandes partes, el corpus y la query. El cor
 
 - algoritmo de Levensthein: que permite determinar la edit_distance entre dos strings,  este es implementado usando una tabla y recursividad: 
   
-  La edit_distance entre dos string no es más que la menor cantidad de operaciones de tipo insertar, reemplazar, borrar que hay que realizar a un string para transformarlo en otro, esto es lo que calcula el algoritmo de Levensthein, la idea es que podemos: a partir de tener la menor distancia para transformar un string en otro, obtener la distancia para transformar el string en el otro pero con un carácter más añadido delante, por ejemplo: $d("alv", "ax") = 2$, si deseamos transformar $"alv"$ en $"axr"$ podemos hacerlo a partir del resultado anterior, de ahí surge la idea de la tabla, calculamos el costo de realizar cada operación: insertar, reemplazar y eliminar, y nos quedamos con el menor.
+  La edit_distance entre dos strings no es más que la menor cantidad de operaciones de tipo insertar, reemplazar, borrar que hay que realizar a un string para transformarlo en otro, esto es lo que calcula el algoritmo de Levensthein, la idea es que podemos: a partir de tener la menor distancia para transformar un string en otro, obtener la distancia para transformar el string en el otro pero con un carácter más añadido delante, por ejemplo: $d("alv", "ax") = 2$, si deseamos transformar $"alv"$ en $"axr"$ podemos hacerlo a partir del resultado anterior, de ahí surge la idea de la tabla, calculamos el costo de realizar cada operación: insertar, reemplazar y eliminar, y nos quedamos con el menor.
 
-- ¿DFS?: en el trie para a partir de un nodo del trie obtener todos los nodos hijos de él que constituyen palabras.  
+- ¿DFS?: utilizado en el trie para, a partir de un nodo del trie, obtener todos los nodos hijos de él que constituyen palabras.  
 
-- merge-k-sorted-lists: toma k listas ordenadas y las junta en una grande ordenada. Implementado de forma eficiente usando un heap (priority queue), la idea es asingnarle a cada palabra un id, de esta forma podemos distinguir las posiciones de dos palabras distintas, transformando las posiciones en tuplas, $(id-posiciones)$ , con esto hecho creo un heap, y pongo inicialmente en él, el primer elemento de cada lista, que es el menor, después voy extrayendo del heap el menor elemento, y verifico si de la lista a la que pertenecía este elemento le quedan elementos todavía, si le quedan insertar el primero al heap, y así hasta que no queden elementos. 
+- merge-k-sorted-lists: toma k listas ordenadas y las junta en una grande ordenada. Implementado de forma eficiente usando un heap (priority queue), la idea es asignarle a cada palabra un id, de esta forma podemos distinguir las posiciones de dos palabras distintas, transformando las posiciones en tuplas, $(id-posiciones)$ , con esto hecho creo un heap, y pongo inicialmente en él, el primer elemento de cada lista, que es el menor, después voy extrayendo del heap el menor elemento, y verifico si de la lista a la que pertenecía este elemento le quedan elementos todavía, si le quedan insertar el primero al heap, y así hasta que no queden elementos. 
 
 - min-interval: dado un array con algunos valores, obtener el menor subintervalo del array que contiene al menos una vez cada distinto valor del array original. Explicado en la sección del score por min-interval.
 
-- min-window: dado un array con algunos valores, hallar el subintervalo de él de tamaño k que contiene la mayor cantidad de distintos valores de él. Esto es usado en el operador de cercanía, la idea es tener un diccionario que lleve la cuenta de las palabras y sus apariciones , entonces cada vez que recorremos una window(intervalo) actualizamos el diccionario y chequeamos si esta window es más pequeña.
+- min-window: dado un array con algunos valores, hallar el subintervalo de él de tamaño k que contiene la mayor cantidad de distintos valores de él. Esto es usado en el operador de cercanía, la idea es tener un diccionario que lleve la cuenta de las palabras y sus apariciones , entonces cada vez que recorremos una window( intervalo ) actualizamos el diccionario y chequeamos si esta window es más pequeña.
 
 - quick-sort: este es un algoritmo de ordenación bastante rápido que usa recursión. Posee una función llamada particionar que toma un valor de un intervalo del array, lo coloca en la posición correcta en este intervalo y pone a su izquierda los valores menores que él y a su derecha los valores mayores que él.
 
@@ -125,7 +125,7 @@ public double request_word_weight(string word, int id, bool allow_similar = fals
 public List<int> request_word_positions(string word, int id, bool allow_similar = false)
 ```
 
-- decide si una palabra es popular entre los documentos, lo es si aparece más de 100 (por ejemplo) veces en cierta cantidad de documentos determinada por el factor.
+- decide si una palabra es popular entre los documentos, lo es, si aparece más de 100 (por ejemplo) veces en cierta cantidad de documentos determinada por el factor.
 
 - devuelve el idf de la palabra, en caso de que se puedan utilizar las palabras similares a ella devuelve el promedio.
 
@@ -157,9 +157,9 @@ Este score es basado en la implementación de un modelo vectorial: las dimension
 
 #### Cercanía:
 
-Dado un documento y una lista de grupos de palabras a encontrar cerca, voy a devolver la cantidad de palabras encontradas cerca aumentado en el recíproco de la longitud del menor intervalo de tamaño a lo más $diámetro$ que contiene las palabras encontradas, o sea, para cada grupo de palabras a buscar cercanas, cuento la cantidad de palabras que de ellas que puedo encontrar en el documento a una intervalo de tamaño a lo más diámetro y a esto le sumo el reciproco de la longitud de el intervalo encontrado pero reducido lo más posible utilizando el algoritmo de min-interval, esta es la idea respecto a el operador de cercanía, este está implementado de la siguiente forma:
+Dado un documento y una lista de grupos de palabras a encontrar cerca, voy a devolver la cantidad de palabras encontradas cerca aumentado en el recíproco de la longitud del menor intervalo de tamaño a lo más $diámetro$ que contiene las palabras encontradas, o sea, para cada grupo de palabras a buscar cercanas, cuento la cantidad de palabras que  puedo encontrar en el documento a una intervalo de tamaño a lo más diámetro y a esto le sumo el reciproco de la longitud de el intervalo encontrado pero reducido lo más posible utilizando el algoritmo de min-interval, esta es la idea respecto a el operador de cercanía, este está implementado de la siguiente forma:
 
-- obtener una lista ordenada por las posiciones donde se encuentran todas las palabras a buscar cercancamente, haciendo un merge-k-sorted-list en las palabras cercanas.
+- obtener una lista ordenada por las posiciones donde se encuentran todas las palabras a buscar cercanamente, haciendo un merge-k-sorted-list en las palabras cercanas.
 
 - recorrer todos los subintervalos de tamaño diámetro, usando un diccionario que lleva la cuenta de la cantidad de palabras que hay en el intervalo y sus apariciones, cada vez que avanzamos y cambiamos de intervalo actualizamos el diccionario y comprobamos si tenemos un mejor intervalo. Con el intervalo que es determinado como mejor debido a ser el de menor tamaño y mayor cantidad de palabras cercanas le aplico el algoritmo de *min-interval* para reducirlo lo más posible.
 
@@ -230,7 +230,7 @@ Creé un objeto de tipo snippet para cada documento, este está compuesto por:
     }
 ```
 
-Este añade a la lista de posiciones un intervalo $A$, y actualiza la información de las palabras contenidas en ese intervalo, también finalmente el snippet posee un método *fill* que utilizará las posiciones de respuesto para completar la query. Finalmente antes de hacer el snippet remuevo los intervalos repetidos o contenidos en otros intervalos. Esto es una idea de lo que hace el snippet internamente. 
+Este añade a la lista de posiciones un intervalo $A$, y actualiza la información de las palabras contenidas en ese intervalo, también finalmente el snippet posee un método *fill* que utilizará las posiciones de respuesto para completar el snippet. Finalmente antes de hacer el snippet remuevo los intervalos repetidos o contenidos en otros intervalos. Esto es una idea de lo que hace el snippet internamente. 
 
 Por otro lado cuando se ejecuta el operador de cercanía si hay algún resultado relevante como un intervalo pequeño con varias palabras, este es añadido a los intervalos relevantes del snippet, después si en el min-intervalo scorer hay algún intervalo relevante también es añadido a los intervalos relevantes, finalmente se añaden las posiciones de respuesto en caso de no haber intervalos usando las posiciones suministradas de argumento al scorer de min-interval.
 

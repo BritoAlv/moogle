@@ -153,7 +153,7 @@ public class trie{
                     result = word;
                 }
             }
-            return result; // get a random word from that list.
+            return result; // get the word with bigger idf from all the words.
         }
         else
         {

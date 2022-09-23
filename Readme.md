@@ -22,7 +22,7 @@ Si estás en Windows, debes poder hacer lo mismo desde la terminal del WSL (Wind
 dotnet watch run --project MoogleServer
 ```
 
-En la carpeta (raíz del proyecto)/Content  o (./Content) debes poner los .txt que vas a utilizar como base de datos, cada vez que haces un cambio en la carpeta ./Content el Moogle lo determinará y ejecutará el stemmer (lo que le halla la raíz a las palabras basado en probabilidad)  (es lento <5 min>, so no te preocupes porque se demore cargando), por suerte esto ocurre la primera vez que se carga el Moogle con la nuvea base de datos, después no se ejecutará porque usará cache y será rápido.
+En la carpeta (raíz del proyecto)/Content  o (./Content) debes poner los .txt que vas a utilizar como base de datos, cada vez que haces un cambio en la carpeta ./Content el Moogle lo determinará y ejecutará el stemmer (lo que le halla la raíz a las palabras basado en probabilidad)  (es lento <5 min>, so no te preocupes porque se demore cargando), por suerte esto ocurre la primera vez que se carga el Moogle con la nueva base de datos, después no se ejecutará porque usará cache y será rápido.
 
 ## Instrucciones para usarlo:
 

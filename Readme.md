@@ -8,6 +8,8 @@ Moogle! es una aplicación *totalmente original* cuyo propósito es buscar intel
 
 Es una aplicación web, desarrollada con tecnología .NET Core 6.0, específicamente usando Blazor como *framework* web para la interfaz gráfica, y en el lenguaje C#.
 
+Este proyecto necesita ser mejorado aun más, lee la última sección si estás interesado.
+
 ## Requisitos y como ejecutarlo:
 
 Necesitas tener instalado algún navegador y tener disponible a dotnet en tu path, o equivalente a esto tener NET CORE 6.0 instalado, para ejecutarlo te debes ubicar en la carpeta del proyecto y ejecutar en la terminal de Linux:
@@ -52,6 +54,10 @@ En la carpeta (raíz del proyecto)/Content  o (./Content) debes poner los .txt q
 
 3. ~ojos
 
-## Ideas Para Añadirle:
+## Mejoras, Bugs e Ideas Para añadirle.
 
-- debido a que el stemmer se toma su tiempo enseñar en consola el porciento por el que va este proceso o mejorar la implementación del stemmer.
+Primero que nada los siguientes bugs están aislados así que puedes identificar el problema, resolverlo aparte y después añadir tu código sin afectar el funcionamiento de el *Moogle*.
+
+El método encargado de colorear las palabras para enseñar al usuario está implementado con Regex, y como consecuencia de esto demora mucho tiempo en hacerse, así que puedes intentar implementarlo de una forma más eficiente.
+
+El algoritmo encargado de realizar el stemming es una implementación traída de Python realizada sin consentimiento alguno sobre su eficiencia, en otras palabras es super lento y no garantiza eficacia, por lo que una mejora en su implementación es necesaria.

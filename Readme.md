@@ -58,6 +58,10 @@ En la carpeta (raíz del proyecto)/Content  o (./Content) debes poner los .txt q
 
 Primero que nada los siguientes bugs están aislados así que puedes identificar el problema, resolverlo aparte y después añadir tu código sin afectar el funcionamiento de el *Moogle*.
 
-El método encargado de colorear las palabras para enseñar al usuario está implementado con Regex, y como consecuencia de esto demora mucho tiempo en hacerse, así que puedes intentar implementarlo de una forma más eficiente.
+1 - El método encargado de colorear las palabras para enseñar al usuario está implementado con Regex, y como consecuencia de esto demora mucho tiempo en hacerse, así que puedes intentar implementarlo de una forma más eficiente.
 
-El algoritmo encargado de realizar el stemming es una implementación traída de Python realizada sin consentimiento alguno sobre su eficiencia, en otras palabras es super lento y no garantiza eficacia, por lo que una mejora en su implementación es necesaria.
+2 - El algoritmo encargado de realizar el stemming es una implementación traída de Python realizada sin consentimiento alguno sobre su eficiencia, en otras palabras es super lento y no garantiza eficacia, por lo que una mejora en su implementación es necesaria.
+
+3 - A la hora de devolver un snippet se debe tener en cuenta que al principio y al final no se pique una palabra a la mitad.
+
+

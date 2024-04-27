@@ -8,7 +8,7 @@ using Constants;
 
 public class Moogle
 {
-    public constant cons = new constant();
+    public Constant cons = new Constant();
     public string time = "0s";
     public corpus x = new corpus();
     public query the_query;

@@ -183,7 +183,7 @@ public class min_heap<T> where T:IComparable<T>
         }
         else
         {
-            // doesnt have either left or right childs so we are done.
+            // doesnt have either left or right child so we are done.
         }    
     }
 

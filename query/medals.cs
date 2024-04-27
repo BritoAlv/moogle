@@ -6,7 +6,7 @@ using Constants;
 public partial class query
 {
 
-    public Tuple<int, string, string, string>[] get_medals( constant cons )
+    public Tuple<int, string, string, string>[] get_medals( Constant cons )
     {
         // we determine medals in the tf-idf category by comparing to the best result.
         // we determine medals in the op_cerc by comparing the items and also with respect

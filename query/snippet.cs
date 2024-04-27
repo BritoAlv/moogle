@@ -10,7 +10,7 @@ public class snippet
     public int index_document; // the index of the document
     public Dictionary<int, int> respuesto;
 
-    public snippet(int a, constant cons)
+    public snippet(int a, Constant cons)
     {
         this.index_document = a;
         this.already_words = new Dictionary<int, bool>();

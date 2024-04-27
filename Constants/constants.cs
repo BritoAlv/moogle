@@ -1,9 +1,9 @@
 namespace Constants;
 using System.Text.Json;
-public class constant
+public class Constant
 {
-    public Dictionary<string, double> constants;
-    public List<string> cons = new List<string>()
+    public readonly Dictionary<string, double> constants;
+    private List<string> _cons = new List<string>()
     {
         "medalla_bronce_tf_idf",
         "medalla_bronce_cercania",
@@ -21,16 +21,17 @@ public class constant
         "diameter_cercania",
         "extra_length_snippet",
     };
-    string path = "../Constants/config.json";
-    public constant()
+
+    private readonly string _path = "../Constants/config.json";
+    public Constant()
     {
         constants = new Dictionary<string, double>();
         try
         {
-            Dictionary<string, double> from_file = JsonSerializer.Deserialize<Dictionary<string, double>>(File.ReadAllText(path));
-            foreach (var key in cons)
+            Dictionary<string, double> fromFile = JsonSerializer.Deserialize<Dictionary<string, double>>(File.ReadAllText(_path));
+            foreach (var key in _cons)
             {
-                constants[key] = from_file[key];
+                constants[key] = fromFile[key];
             }
         }
         catch (System.Exception)
@@ -51,7 +52,7 @@ public class constant
             constants["diameter_cercania"] = 500;
             constants["extra_length_snippet"] = 100;
             string jsonString1 = JsonSerializer.Serialize(constants, new JsonSerializerOptions{WriteIndented = true});
-            File.WriteAllText(path, jsonString1);
+            File.WriteAllText(_path, jsonString1);
         }
     }
 }

@@ -6,7 +6,7 @@ using Constants;
 using d_t_h;
 public partial class query
 {
-    public void by_min_in(int doc_index, constant cons)
+    public void by_min_in(int doc_index, Constant cons)
     {
         /*
         now apply the algorithm to result to get the score of this document based on min interval, 

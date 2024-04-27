@@ -7,7 +7,7 @@ using d_t_h;
 using Constants;
 public partial class query
 {
-    public void scorers(corpus x, List<int> index_of_docs_to_consider, constant cons)
+    public void scorers(corpus x, List<int> index_of_docs_to_consider, Constant cons)
     {
         foreach (var doc_index in index_of_docs_to_consider)
         {

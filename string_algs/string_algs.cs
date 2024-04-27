@@ -28,7 +28,7 @@ public static class string_algs
 
     public static string replace( string replacement , string old, string input)
     {
-        // replace every ocurrence of old by new in the replace string,
+        // replace every occurrence of old by new in the replace string,
         string pattern = @"\b" + old + @"\b";
         string result = Regex.Replace(input, pattern, replacement);
         return result;   

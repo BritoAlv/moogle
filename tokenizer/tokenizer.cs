@@ -30,15 +30,15 @@ public void process(string doc_name,string text, int id, Dictionary<string, info
 
     // compute hash of the text,
     string hash = QuickHash(text);
-    // un parche 
+    // un parch 
     text = text + " ";
-    // un parche
+    // un parch
     if (!this.hashes_on_txt.Contains(hash))
     {
      
-        // we have to split the texxt and while.
+        // we have to split the text and while.
         // update the dict bdd.
-        // update a temp dict to generate the two jsons.
+        // update a temp dict to generate the two json.
         // generate json and write this hash to the list of common hashes.
         Dictionary<string , double> tf_to_json = new Dictionary<string, double>();
         Dictionary<string, List<int>> pos_to_json = new Dictionary<string, List<int>>();
@@ -114,7 +114,7 @@ public void process(string doc_name,string text, int id, Dictionary<string, info
     }
     else
     {
-        // load the json of the doc and update its words in the databse.
+        // load the json of the doc and update its words in the database.
         Dictionary<string , double> tf_to_json = JsonSerializer.Deserialize<Dictionary<string, double>>(File.ReadAllText("../cache/"+doc_name+"1.json"));
         Dictionary<string , List<int>> pos_to_json = JsonSerializer.Deserialize<Dictionary<string, List<int>>>(File.ReadAllText("../cache/"+doc_name+"2.json"));
 

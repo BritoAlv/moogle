@@ -29,7 +29,7 @@ public partial class query
     public Tuple<int, string,string,string>[] best_docs;
     double norm;
 
-    public query(string s, corpus x, constant cons)
+    public query(string s, corpus x, Constant cons)
     {
         ////////////////////////////////////////////////////////////////////////////// 
         //save all the relevant info of the query. Why use A HashSet and not something else;

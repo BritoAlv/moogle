@@ -3,7 +3,7 @@ using d_t_h;
 using Constants;
 public partial class query
 {
-    public void by_cercania(int doc_index, constant cons)
+    public void by_cercania(int doc_index, Constant cons)
     {
         /////////////////////////////////////////////////////////////////////////////////
         /*
